@@ -1,14 +1,19 @@
-import { useState } from 'react'
-
-import './css/styles.css'
+import { Canvas } from "@react-three/fiber";
+import { Experience } from "./components/Experience";
+import { Physics } from "@react-three/rapier";
+import { Suspense } from "react";
 
 function App() {
-
   return (
-    <>
-      <h1>Hola mundo</h1>
-    </>
-  )
+    <Canvas shadows camera={{ position: [90, 20, 60], fov: 40 }}>
+      <color attach="background" args={["#ececec"]} />
+      <Suspense>
+        <Physics>
+          <Experience />
+        </Physics>
+      </Suspense>
+    </Canvas>
+  );
 }
 
-export default App
+export default App;

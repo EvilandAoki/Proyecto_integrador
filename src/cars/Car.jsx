@@ -2,9 +2,7 @@ import { useGLTF } from "@react-three/drei"
 import supra from '../assets/models/cars/porche.glb'
 
 export const Car = () => {  
-    const carmodel = useGLTF("/assets/models/cars/tractor.glb")
+    const carmodel = useGLTF("/src/assets/models/cars/porche.glb")
     console.log(carmodel)
-    return (
-        null
-    )
+    return carmodel
 }

@@ -1,0 +1,25 @@
+.homeScreenBackground {
+    height: 100vh;
+    background-image: url('/public/background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+.title-game {
+  font-family: "Faster One", system-ui;
+  background: linear-gradient(to right, rgb(255, 0, 0), rgb(251, 255, 0));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 400;
+  font-size: 50px;
+  font-style: normal;
+}
+
+.top-controls {
+  position: absolute;
+  top: 0;
+}
+  

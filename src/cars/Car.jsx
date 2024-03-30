@@ -1,10 +1,10 @@
 import { useGLTF } from "@react-three/drei"
 
 export const Car = (props) => {
-    const { nodes, materials } = useGLTF('/src/assets/models/cars/porche_ruedas.glb')
+    const { nodes, materials } = useGLTF('/assets/models/cars/porche_ruedas.glb')
 
-    // console.log(nodes, "nodes")
-    // console.log(materials,"materiales")
+    console.log(nodes, "nodes")
+    console.log(materials,"materiales")
 
     return (
         <group {...props} dispose={null}>

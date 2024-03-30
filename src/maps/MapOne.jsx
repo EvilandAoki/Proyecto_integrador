@@ -3,10 +3,10 @@ import { useGLTF, useTexture } from "@react-three/drei"
 
 export const MapOne = (props) => {
 
-    const { nodes, materials } = useGLTF('/src/assets/models/maps/basemapa.glb')
+    const { nodes, materials } = useGLTF('/assets/models/maps/basemapa.glb')
 
     const propsTextures = useTexture({
-        
+
     })
 
     return (

@@ -2,6 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
 import { Physics } from "@react-three/rapier";
 import { Suspense } from "react";
+import { KeyboardControls } from "./controls";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Experience />
         </Physics>
       </Suspense>
+      <KeyboardControls/>
     </Canvas>
   );
 }

@@ -1,8 +1,7 @@
 import { useStore } from '@react-three/fiber';
 import { useContext, useEffect } from 'react'
 import GameContext from '../context/gameContext/GameProvider'
-
-
+import { useMemo } from 'react';
 
 
 export function KeyboardControls() {
@@ -52,5 +51,6 @@ export function KeyboardControls() {
     }, [actionInputMap]);
 
     return null;
+
 }
 

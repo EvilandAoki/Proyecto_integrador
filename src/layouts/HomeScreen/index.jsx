@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "./styles.css";
-import LOGO_UNIVALLE from "../../../public/logo-univalle.png";
+import LOGO_UNIVALLE from "/public/logo-univalle.png";
 
 const HomeScreen = (props) => {
     const { children } = props;

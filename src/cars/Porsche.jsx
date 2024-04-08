@@ -8,7 +8,7 @@ export const Porsche = (props) => {
   console.log(materials, "materiales")
 
   return (
-    <RigidBody type="fixed" colliders="cuboid" position={[1, 5, 5]}>
+    <RigidBody  colliders="cuboid" position={[5, 0, 5]}>
       <group {...props} dispose={null}>
         <mesh castShadow receiveShadow geometry={nodes.Circle001.geometry} material={materials.car} />
         <mesh

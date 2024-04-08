@@ -3,8 +3,9 @@ import { useFrame } from "@react-three/fiber";
 import { Physics, RigidBody } from "@react-three/rapier";
 import { useRef } from "react";
 import { BoxGeometry, CylinderGeometry, Mesh, MeshDistanceMaterial, MeshLambertMaterial, MeshMatcapMaterial, SphereGeometry } from "three";
-import { Car } from "../cars/Car";
 import { MapOne } from "../maps/MapOne";
+import { Porsche } from "../cars/Porsche";
+import { Supra } from "../cars/Supra";
 
 export const Experience = () => {
 
@@ -15,7 +16,8 @@ export const Experience = () => {
             <OrbitControls makeDefault />
             <ambientLight intensity={0.5} />
             <Physics debug={true}>
-                <Car />
+                <Porsche />
+                <Supra />
                 <RigidBody>
                     <mesh castShadow position={[2, 2, 0]}>
                         <boxGeometry />

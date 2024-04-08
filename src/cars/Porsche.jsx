@@ -1,14 +1,14 @@
 import { useGLTF } from "@react-three/drei"
 import { RigidBody } from "@react-three/rapier"
 
-export const Car = (props) => {
+export const Porsche = (props) => {
   const { nodes, materials } = useGLTF('/assets/models/cars/porche_ruedas.glb')
 
   console.log(nodes, "nodes")
   console.log(materials, "materiales")
 
   return (
-    <RigidBody colliders="cuboid" position={[5, 5, 0]}>
+    <RigidBody type="fixed" colliders="cuboid" position={[1, 5, 5]}>
       <group {...props} dispose={null}>
         <mesh castShadow receiveShadow geometry={nodes.Circle001.geometry} material={materials.car} />
         <mesh

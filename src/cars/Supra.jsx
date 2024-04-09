@@ -8,8 +8,8 @@ export const Supra = (props) => {
   console.log(materials, "materiales")
 
   return (
-    <RigidBody colliders="cuboid" position={[2, 0, 2]}>
-      <group {...props} dispose={null}>
+    <RigidBody colliders="hull" type="dynamic" position={[2, 0, 2]}>
+      <group {...props} dispose={null} scale={1.0}>
         <mesh
           castShadow
           receiveShadow
@@ -76,146 +76,151 @@ export const Supra = (props) => {
           geometry={nodes.Circle001_10.geometry}
           material={materials.silencer}
         />
-        <group
-          position={[0.641, 0.313, 1.206]}
-          rotation={[0, 0, -Math.PI / 2]}
-          scale={[0.315, 0.155, 0.315]}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder.geometry}
-            material={materials.tire}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder_1.geometry}
-            material={materials.rims}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder_2.geometry}
-            material={materials.brake_disk}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder_3.geometry}
-            material={materials.brake}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder_4.geometry}
-            material={materials.chrome}
-          />
-        </group>
-        <group
-          position={[-0.642, 0.313, 1.206]}
-          rotation={[Math.PI, 0, -Math.PI / 2]}
-          scale={[-0.315, -0.155, -0.315]}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder009.geometry}
-            material={materials.tire}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder009_1.geometry}
-            material={materials.rims}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder009_2.geometry}
-            material={materials.brake_disk}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder009_3.geometry}
-            material={materials.brake}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder009_4.geometry}
-            material={materials.chrome}
-          />
-        </group>
-        <group
-          position={[0.641, 0.308, -1.183]}
-          rotation={[0, 0, -Math.PI / 2]}
-          scale={[0.315, 0.155, 0.315]}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder010.geometry}
-            material={materials.tire}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder010_1.geometry}
-            material={materials.rims}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder010_2.geometry}
-            material={materials.brake_disk}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder010_3.geometry}
-            material={materials.brake}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder010_4.geometry}
-            material={materials.chrome}
-          />
-        </group>
-        <group
-          position={[-0.642, 0.308, -1.183]}
-          rotation={[-Math.PI, 0, -Math.PI / 2]}
-          scale={[-0.315, -0.155, -0.315]}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder011.geometry}
-            material={materials.tire}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder011_1.geometry}
-            material={materials.rims}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder011_2.geometry}
-            material={materials.brake_disk}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder011_3.geometry}
-            material={materials.brake}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Cylinder011_4.geometry}
-            material={materials.chrome}
-          />
-        </group>
+        
+          <group
+            position={[0.641, 0.313, 1.206]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.315, 0.155, 0.315]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder.geometry}
+              material={materials.tire}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder_1.geometry}
+              material={materials.rims}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder_2.geometry}
+              material={materials.brake_disk}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder_3.geometry}
+              material={materials.brake}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder_4.geometry}
+              material={materials.chrome}
+            />
+          </group>
+          <group
+            position={[-0.642, 0.313, 1.206]}
+            rotation={[Math.PI, 0, -Math.PI / 2]}
+            scale={[-0.315, -0.155, -0.315]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder009.geometry}
+              material={materials.tire}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder009_1.geometry}
+              material={materials.rims}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder009_2.geometry}
+              material={materials.brake_disk}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder009_3.geometry}
+              material={materials.brake}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder009_4.geometry}
+              material={materials.chrome}
+            />
+          </group>
+        
+
+        
+          <group
+            position={[0.641, 0.308, -1.183]}
+            rotation={[0, 0, -Math.PI / 2]}
+            scale={[0.315, 0.155, 0.315]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder010.geometry}
+              material={materials.tire}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder010_1.geometry}
+              material={materials.rims}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder010_2.geometry}
+              material={materials.brake_disk}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder010_3.geometry}
+              material={materials.brake}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder010_4.geometry}
+              material={materials.chrome}
+            />
+          </group>
+       
+          <group
+            position={[-0.642, 0.308, -1.183]}
+            rotation={[-Math.PI, 0, -Math.PI / 2]}
+            scale={[-0.315, -0.155, -0.315]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder011.geometry}
+              material={materials.tire}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder011_1.geometry}
+              material={materials.rims}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder011_2.geometry}
+              material={materials.brake_disk}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder011_3.geometry}
+              material={materials.brake}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Cylinder011_4.geometry}
+              material={materials.chrome}
+            />
+          </group>
       </group>
     </RigidBody>
   )

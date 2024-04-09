@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import React, { Suspense } from 'react'
 import { Experience } from '../components/Experience.jsx'
+import { Perf } from 'r3f-perf'
 
 export const CanvasLevel = () => {
 
@@ -24,6 +25,7 @@ export const CanvasLevel = () => {
                     <Experience />
                 </Physics>
             </Suspense>
+            <Perf />
         </Canvas>
     )
 }

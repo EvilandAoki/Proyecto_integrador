@@ -2,226 +2,45 @@ import { useGLTF } from "@react-three/drei"
 import { RigidBody } from "@react-three/rapier"
 
 export const Supra = (props) => {
-  const { nodes, materials } = useGLTF('/assets/models/cars/supra.glb')
+  const { nodes, materials } = useGLTF('/assets/models/cars/supra_blender.glb')
 
   console.log(nodes, "nodes")
   console.log(materials, "materiales")
 
   return (
-    <RigidBody colliders="hull" type="dynamic" position={[2, 0, 2]}>
-      <group {...props} dispose={null} scale={1.0}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001.geometry}
-          material={materials.main_color}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001_1.geometry}
-          material={materials.dark_metal}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001_2.geometry}
-          material={materials.dark_plastic}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001_3.geometry}
-          material={materials.windows}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001_4.geometry}
-          material={materials.chrome}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001_5.geometry}
-          material={materials.back_ligths}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001_6.geometry}
-          material={materials.transparent}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001_7.geometry}
-          material={materials.brake_lights}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001_8.geometry}
-          material={materials.turn_lights}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001_9.geometry}
-          material={materials.headlights}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Circle001_10.geometry}
-          material={materials.silencer}
-        />
-        
-          <group
-            position={[0.641, 0.313, 1.206]}
-            rotation={[0, 0, -Math.PI / 2]}
-            scale={[0.315, 0.155, 0.315]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder.geometry}
-              material={materials.tire}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder_1.geometry}
-              material={materials.rims}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder_2.geometry}
-              material={materials.brake_disk}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder_3.geometry}
-              material={materials.brake}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder_4.geometry}
-              material={materials.chrome}
-            />
-          </group>
-          <group
-            position={[-0.642, 0.313, 1.206]}
-            rotation={[Math.PI, 0, -Math.PI / 2]}
-            scale={[-0.315, -0.155, -0.315]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder009.geometry}
-              material={materials.tire}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder009_1.geometry}
-              material={materials.rims}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder009_2.geometry}
-              material={materials.brake_disk}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder009_3.geometry}
-              material={materials.brake}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder009_4.geometry}
-              material={materials.chrome}
-            />
-          </group>
-        
+    <RigidBody colliders="hull" position={[2, 0, 2]}>
+      <group {...props} dispose={null}>
+        <group>
+          <group>
+            <mesh geometry={nodes.car_1.geometry} material={materials.main_color} />
+            <mesh geometry={nodes.car_2.geometry} material={materials.dark_plastic} />
+            <mesh geometry={nodes.car_3.geometry} material={materials.back_ligths} />
 
-        
-          <group
-            position={[0.641, 0.308, -1.183]}
-            rotation={[0, 0, -Math.PI / 2]}
-            scale={[0.315, 0.155, 0.315]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder010.geometry}
-              material={materials.tire}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder010_1.geometry}
-              material={materials.rims}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder010_2.geometry}
-              material={materials.brake_disk}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder010_3.geometry}
-              material={materials.brake}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder010_4.geometry}
-              material={materials.chrome}
-            />
+            <group>
+              <mesh geometry={nodes.wheel_FL_1.geometry} material={materials.tire} />
+              <mesh geometry={nodes.wheel_FL_2.geometry} material={materials.rims} />
+            </group>
+
+            <group>
+              <mesh geometry={nodes.wheel_FR_1.geometry} material={materials.tire} />
+              <mesh geometry={nodes.wheel_FR_2.geometry} material={materials.rims} />
+            </group>
+
+            <group>
+              <mesh geometry={nodes.wheel_RL_1.geometry} material={materials.tire} />
+              <mesh geometry={nodes.wheel_RL_2.geometry} material={materials.rims} />
+            </group>
+
+            <group>
+              <mesh geometry={nodes.wheel_RR_1.geometry} material={materials.tire} />
+              <mesh geometry={nodes.wheel_RR_2.geometry} material={materials.rims} />
+            </group>
+
           </group>
-       
-          <group
-            position={[-0.642, 0.308, -1.183]}
-            rotation={[-Math.PI, 0, -Math.PI / 2]}
-            scale={[-0.315, -0.155, -0.315]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder011.geometry}
-              material={materials.tire}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder011_1.geometry}
-              material={materials.rims}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder011_2.geometry}
-              material={materials.brake_disk}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder011_3.geometry}
-              material={materials.brake}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder011_4.geometry}
-              material={materials.chrome}
-            />
-          </group>
+        </group>
       </group>
     </RigidBody>
+
   )
+
 }

@@ -5,11 +5,6 @@ import { RigidBody } from "@react-three/rapier"
 export const MapOne = (props) => {
 
     const { nodes, materials } = useGLTF('/assets/models/maps/basemapa.glb')
-
-    const propsTextures = useTexture({
-
-    })
-
     return (
         <RigidBody colliders="trimesh" type="fixed">
             <group {...props} dispose={null}>

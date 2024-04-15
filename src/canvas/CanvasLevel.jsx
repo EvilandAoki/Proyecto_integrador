@@ -7,10 +7,10 @@ import { Perf } from 'r3f-perf'
 
 export const CanvasLevel = () => {
 
-    const [sub, get] = useKeyboardControls();
+    // const [sub, get] = useKeyboardControls();
 
-    console.log(sub, "que me genera el sub?")
-    console.log(get, "que me genera el get?")
+    // console.log(sub, "que me genera el sub?")
+    // console.log(get, "que me genera el get?")
 
     return (
         <Canvas shadows camera={{
@@ -22,7 +22,7 @@ export const CanvasLevel = () => {
             <color attach="background" args={["#ececec"]} />
             <Suspense>
                 <Physics>
-                    <Experience />
+                    {/* <Experience /> */}
                 </Physics>
             </Suspense>
             <Perf />

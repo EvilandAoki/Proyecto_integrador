@@ -8,7 +8,7 @@ export const Supra = (props) => {
   console.log(materials, "materiales")
 
   return (
-    <RigidBody colliders="hull" position={[2, 0, 2]}>
+    <RigidBody colliders="hull" type="fixed" position={[5, 3, 5]}>
       <group {...props} dispose={null}>
         <group>
           <group>

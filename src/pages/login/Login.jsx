@@ -2,9 +2,12 @@ import { useState } from "react";
 
 import "../../layouts/HomeScreen/styles.css";
 import LOGO_UNIVALLE from "/public/logo-univalle.png";
+import { useNavigate } from "react-router-dom";
 
 export const Login = (props) => {
     const { children } = props;
+
+    const navigate = useNavigate()
 
     const [currentScreen, setCurrentScreen] = useState(0);
 
@@ -27,7 +30,7 @@ export const Login = (props) => {
                             <div className="d-flex flex-column justify-content-center">
                                 <button
                                     className="btn btn-dark mb-4"
-                                    onClick={handleScreen(1)}
+                                    onClick={() => navigate('/levelOne')}
                                 >
                                     CONTINUAR
                                 </button>

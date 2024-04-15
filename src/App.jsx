@@ -1,16 +1,12 @@
-import HomeScreen from "./layouts/HomeScreen";
-import { ReferenceKeyboardControls } from "./controls/ReferenceKeyboardControls";
 import { CanvasLevel } from "./canvas/CanvasLevel";
+import { GameRoutes } from "./routes/GameRoutes";
 
 function App() {
 
   return (
-    <HomeScreen>
-      <ReferenceKeyboardControls >
-        <CanvasLevel />
-      </ReferenceKeyboardControls >
-    </HomeScreen>
-  );
+    <GameRoutes>
+    </GameRoutes>
+  )
 }
 
 export default App;

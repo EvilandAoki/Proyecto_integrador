@@ -1,17 +1,13 @@
-import { Box, Circle, FlyControls, OrbitControls } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { Physics, RigidBody } from "@react-three/rapier";
-import { useRef } from "react";
-import { BoxGeometry, CylinderGeometry, Mesh, MeshDistanceMaterial, MeshLambertMaterial, MeshMatcapMaterial, SphereGeometry } from "three";
-import { MapOne } from "../maps/MapOne";
-import { Porsche } from "../cars/Porsche";
-import { Supra } from "../cars/Supra";
+import { FlyControls, OrbitControls } from "@react-three/drei";
+import { Physics } from "@react-three/rapier";
+import { Supra } from "../components/cars/Supra";
+import { Porsche } from "../components/cars/Porsche";
+import { WorldOne } from "../pages/levelOne/world/WorldOne";
 
 export const Experience = () => {
 
     return (
         <>
-            <ambientLight />
             <directionalLight position={[50, 10, 5]} />
             <OrbitControls makeDefault />
             <FlyControls />
@@ -19,7 +15,7 @@ export const Experience = () => {
             <Physics debug={true}>
                 <Supra />
                 <Porsche />
-                <MapOne />
+                <WorldOne />
             </Physics>
         </>
     );

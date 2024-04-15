@@ -8,7 +8,7 @@ export const Porsche = (props) => {
   console.log(materials, "materiales")
 
   return (
-    <RigidBody colliders="hull" position={[5, 0, 5]} scale={1.5}>
+    <RigidBody colliders="hull" type="fixed" position={[5, 0, 5]} scale={1.5}>
       <group {...props} dispose={null}>
         <group>
           <group>

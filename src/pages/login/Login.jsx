@@ -23,7 +23,7 @@ export const Login = (props) => {
                         <img src={LOGO_UNIVALLE} height={100} />
                     </div>
                     <div className="d-flex justify-content-center align-items-center h-50">
-                        <div className="d-flex flex-column justify-content-around h-100 p-2 bg-light bg-opacity-50 rounded shadow-lg px-4">
+                        <div className="d-flex flex-column justify-content-around h-100 p-2 bg-login bg-opacity-50 rounded shadow-lg px-4">
                             <h1 className="title-game text-center">
                                 Super Drift Game
                             </h1>

@@ -31,3 +31,7 @@ body {
   position: absolute;
   top: 0;
 }
+
+.bg-login{
+  background-color: rgba(248, 249, 250, 0.1);
+}

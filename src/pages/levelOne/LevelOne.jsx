@@ -5,6 +5,8 @@ import { Perf } from 'r3f-perf'
 import React, { Suspense } from 'react'
 import { WorldOne } from './world/WorldOne'
 import { LightsOne } from './lights/LightsOne'
+import { Supra } from '../../components/cars/Supra'
+import { Porsche } from '../../components/cars/Porsche'
 
 export const LevelOne = () => {
 
@@ -12,9 +14,9 @@ export const LevelOne = () => {
         <Canvas
             camera={{
                 fov: 45,
-                near: 0.1,
-                far: 200,
-                position: [0, 1, 0]
+                near: 0.7,
+                far: 300,
+                position: [5, 4, 5]
             }}
         >
             <color attach="background" args={["#ececec"]} />
@@ -23,6 +25,8 @@ export const LevelOne = () => {
             <Physics debug={true}>
                 <Suspense>
                     <WorldOne />
+                    <Supra />
+                    <Porsche />
                 </Suspense>
             </Physics>
             <Perf />

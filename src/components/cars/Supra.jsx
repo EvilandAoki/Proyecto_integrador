@@ -8,8 +8,9 @@ export const Supra = (props) => {
   console.log(materials, "materiales")
 
   return (
-    <RigidBody colliders="hull" type="fixed" position={[5, 3, 5]}>
-      <group {...props} dispose={null}>
+
+    <group {...props} dispose={null}>
+      <RigidBody colliders="hull"  position={[2, 10, 5]}>
         <group>
           <group>
             <mesh geometry={nodes.car_1.geometry} material={materials.main_color} />
@@ -38,9 +39,7 @@ export const Supra = (props) => {
 
           </group>
         </group>
-      </group>
-    </RigidBody>
-
+      </RigidBody>
+    </group>
   )
-
 }

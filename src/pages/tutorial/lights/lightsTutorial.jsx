@@ -1,15 +1,24 @@
 
-import React from 'react'
-import { Color, HemisphereLight } from "three";
 
-// posiciones en luces en los ejes:  position={[100, 10, 5]}
-// posiciones en luces en los ejes:  position={[100, 10, 5]}
+import { Color } from "three";
+
+const lightPosition = [10, 5, 10];
+const lightIntensity = 0.3;
+const shadowMapSize = 1024;
+
 
 export const LightsTutorial = () => {
     return (
         <>
-            <directionalLight position={[100, 100, 100]} />
-            <ambientLight />
+            {/* Luces */}
+            <directionalLight
+                position={lightPosition}
+                intensity={lightIntensity}
+                shadow-mapSize-width={shadowMapSize}
+                shadow-mapSize-height={shadowMapSize}
+                castShadow
+            />
+            <ambientLight intensity={3} />
         </>
     )
 }

@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber"
 import { LightsOne } from "../levelOne/lights/LightsOne"
-import { OrbitControls } from "@react-three/drei"
+import { CameraControls, FlyControls, MotionPathControls, OrbitControls, PerspectiveCamera } from "@react-three/drei"
 import { Physics } from "@react-three/rapier"
 import { Suspense } from "react"
 import { Perf } from "r3f-perf"
@@ -19,10 +19,11 @@ export const TutorialLevel = () => {
                 position: [5, 4, 5]
             }}
         >
+            <PerspectiveCamera makeDefault position={[0, 10, 20]} />
+            <CameraControls  />
             <color attach="background" args={["#ececec"]} />
             <LightsTutorial />
-            <OrbitControls makeDefault />
-            <Physics debug={true}>
+            <Physics debug={false}>
                 <Suspense>
                     <TutorialMap />
                     <Supra />

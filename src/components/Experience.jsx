@@ -1,6 +1,6 @@
 import { FlyControls, OrbitControls } from "@react-three/drei";
 import { Physics } from "@react-three/rapier";
-import { Supra } from "../components/cars/Supra";
+import Supra from "../components/cars/Supra";
 import { Porsche } from "../components/cars/Porsche";
 import { WorldOne } from "../pages/levelOne/world/WorldOne";
 

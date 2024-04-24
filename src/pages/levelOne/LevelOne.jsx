@@ -5,7 +5,7 @@ import { Perf } from 'r3f-perf'
 import React, { Suspense } from 'react'
 import { WorldOne } from './world/WorldOne'
 import { LightsOne } from './lights/LightsOne'
-import { Supra } from '../../components/cars/Supra'
+import Supra from '../../components/cars/Supra'
 import { Porsche } from '../../components/cars/Porsche'
 
 export const LevelOne = () => {

@@ -35,7 +35,6 @@ export const TutorialLevel = () => {
                 <Perf />
                 <CarControls />
             </Canvas>
-            
         </CarKeyboardControls>
     )
 }

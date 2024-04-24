@@ -53,7 +53,7 @@ export const CarControls = () => {
         }
 
         body?.applyImpulse(impulse, true);
-        //body?.applyTorqueImpulse(torque, true)
+        body?.applyTorqueImpulse(torque, true)
     })
 }
 

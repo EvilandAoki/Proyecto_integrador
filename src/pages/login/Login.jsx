@@ -4,17 +4,10 @@ import LOGO_UNIVALLE from "/public/logo-univalle.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
 
-export const Login = (props) => {
-    const { children } = props;
+export const Login = () => {
     const navigate = useNavigate();
 
     const { loginWithGoogle, logout, userData } = useAuth();
-
-    const [currentScreen, setCurrentScreen] = useState(0);
-
-    const handleScreen = (screenKey) => () => {
-        setCurrentScreen(screenKey);
-    };
 
     const onHandleGoogle = (e) => {
         e.preventDefault();
@@ -49,6 +42,12 @@ export const Login = (props) => {
                             >
                                 Continuar juego
                             </button>
+                            <button
+                                className="btn btn-dark mb-4"
+                                onClick={() => navigate("/tutorial")}
+                            >
+                                Tutorial
+                            </button>
                             <button className="btn btn-secondary mb-4" onClick={logout}>
                                 Cerrar sesión
                             </button>
@@ -72,33 +71,3 @@ export const Login = (props) => {
         </div>
     );
 };
-/*<div className="d-flex flex-column justify-content-center"> 
-<button
-    className="btn btn-dark mb-4"
-    onClick={() => navigate('/levelOne')}
->
-    CONTINUAR
-</button>
-<button className="btn btn-secondary mb-4">
-    NUEVO JUEGO
-</button>
-<button className="btn btn-secondary mb-4">
-    Iniciar sesion
-</button>
- </div> */
-/* <div className="vh-100">
-    {children}
-    <div className="d-flex w-100 justify-content-between px-4 pt-2 top-controls">
-        <div>
-        </div>
-        <div>
-            <button
-                className="btn btn-secondary mb-4"
-                onClick={handleScreen(0)}
-            >
-                Volver
-            </button>
-        </div>
-    </div>
-    
-</div> */

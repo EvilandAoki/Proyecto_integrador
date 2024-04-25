@@ -1,51 +1,89 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { auth } from "../firebase.config"
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
+
+export const useAuth = () => {
+    const context = useContext(AuthContext)
+    if(!context){
+        console.error('Error al usar el contexto');
+        return;
+    }
+    return context;
+}
 
 //contexto de toda la aplicacion
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
 
-    const [userData, setUserData] = useState({});
-    const [gameInfo, setGameInfo] = useState({});
+    const [userData, setUserData] = useState(null);
+    const [gameInfo, setGameInfo] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const saveUserData = (data) => {
-        //validaciones y otros
-        setUserData(data);
-        localStorage.setItem('userData', data)
-    }
+    useEffect(() => {
+        const suscribed = onAuthStateChanged(auth, (currentUser) => {
+            saveUserData(currentUser)
+        })
+
+        return () => suscribed()
+      }, [])
 
     const saveGameInfo= (data) => {
         //validaciones y otros
         setGameInfo(data);
-        localStorage.setItem('gameInfo', data)
+        localStorage.setItem('gameInfo', JSON.stringify(data))
+    }
+
+    const saveUserData = (data) => {
+        if(data){
+            setUserData(data);
+            localStorage.setItem('userData', JSON.stringify(data))
+        }
     }
 
     const loadInfo = async () => {
         const _gameInfo = localStorage.getItem('userData');
         const _userData = localStorage.getItem('gameInfo');
 
-        saveGameInfo(_gameInfo);
-        saveUserData(_userData);
+        saveGameInfo(JSON.parse(_gameInfo));
+        setUserData(JSON.parse(_userData));
     }
 
-    const handleLoading = () => {
-        setLoading(!loading)
+    const loginWithGoogle = async () => {
+        setLoading(true);
+        try {
+            const provider = new GoogleAuthProvider();
+            const res = await signInWithPopup(auth, provider)
+            setLoading(false);
+            saveUserData(res.user);
+            return { success:  true, user: res.user }
+        } catch (error) {
+            setLoading(false);
+            return { success: false,  error}
+        }
     }
-
-    useEffect(() => {
-        loadInfo();
-    }, [])
+    
+    const logout = async () => {
+        try {
+            await signOut(auth);
+            localStorage.clear()
+            setGameInfo(null)
+            setUserData(null)
+            return { success:  true }
+        } catch (error) {
+            return { success: false,  error}
+        }
+    }
 
     return (
         <AuthContext.Provider
             value={{
+                loginWithGoogle,
+                logout,
                 userData,
-                saveUserData,
                 gameInfo,
                 saveGameInfo,
                 loading,
-                handleLoading,
                 loadInfo
             }}
         >
@@ -53,10 +91,6 @@ const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
 
     )
-}
-
-export {
-    AuthProvider
 }
 
 export default AuthContext;

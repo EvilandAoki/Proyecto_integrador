@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useKeyboardControls, KeyboardControls } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import { useCarContext } from "../../context"
+import { quat } from "@react-three/rapier"
 
 
 const actionInputMap = [  
@@ -22,38 +23,25 @@ export const CarControls = () => {
         const {ref, body} = car;
 
         const impulse = {x: 0, y: 0, z: 0};
-        const torque = {x: 0, y: 0, z: 0}
 
-        const impulseStrength = 1 * delta;
-        const toqueStrength = 1 * delta;
+        const impulseStrength = 2;
 
         if(forward){
-            
             impulse.z -= impulseStrength
-            torque.x -= toqueStrength
-            console.log('forward', impulse)
         }
         if(backward){
-            
             impulse.z += impulseStrength
-            torque.x += toqueStrength
-            console.log('backward', impulse)
         }
         if(rightward){
-           
-            impulse.x += impulseStrength
-            torque.z -= toqueStrength
-            console.log('rightward', impulse)
+            const quaternion = quat(body.rotation())
+            quaternion.y = Math.PI / 0.25
+            body.setRotation(quaternion, true)
         }
         if(leftward){
-           
             impulse.x -= impulseStrength
-            torque.z += toqueStrength
-            console.log('leftward', impulse)
         }
 
         body?.applyImpulse(impulse, true);
-        body?.applyTorqueImpulse(torque, true)
     })
 }
 

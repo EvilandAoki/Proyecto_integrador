@@ -22,7 +22,7 @@ const Supra = (props) => {
 
   return (<>
     <group {...props} dispose={null}>
-      <RigidBody ref={supraBodyRef} colliders="hull"  restitution={0.2} friction={1}  position={[0, 0, 5]}>
+      <RigidBody ref={supraBodyRef} type="dynamic" colliders="hull"  restitution={0.2} friction={1}  position={[0, 0, 5]}>
         <group ref={supraRef}>
           <group>
             <mesh geometry={nodes.car_1.geometry} material={materials.main_color} />

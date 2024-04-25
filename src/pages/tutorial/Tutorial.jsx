@@ -8,7 +8,8 @@ import { TutorialMap } from "./world/TutorialMap"
 import { LightsTutorial } from "./lights/lightsTutorial"
 import Supra from "../../components/cars/Supra"
 import CarControls, { CarKeyboardControls } from "../../components/controls/CarControls"
-
+import Ecctrl, { EcctrlAnimation } from "ecctrl";
+import { Porsche } from "../../components/cars/Porsche"
 
 export const TutorialLevel = () => {
 
@@ -23,10 +24,10 @@ export const TutorialLevel = () => {
                 }}
             >
                 <PerspectiveCamera makeDefault position={[0, 10, 20]} />
-                <CameraControls  />
+                <CameraControls />
                 <color attach="background" args={["#ececec"]} />
                 <LightsTutorial />
-                <Physics debug={false}>
+                <Physics debug={true}>
                     <Suspense>
                         <TutorialMap />
                         <Supra />

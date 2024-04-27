@@ -15,7 +15,7 @@ export const MapOne = (props) => {
                     material={materials.Material}
                 />
                 <mesh
-                    castShadow
+                    castShadow={true}
                     receiveShadow
                     geometry={nodes.floor.geometry}
                     material={materials.Material}

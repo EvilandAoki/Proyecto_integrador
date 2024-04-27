@@ -16,7 +16,12 @@ export const LightsTutorial = () => {
                 intensity={lightIntensity}
                 shadow-mapSize-width={shadowMapSize}
                 shadow-mapSize-height={shadowMapSize}
-                castShadow
+                castShadow={true}
+                shadow-camera-far={50}
+                shadow-camera-left={-10}
+                shadow-camera-right={10}
+                shadow-camera-top={10}
+                shadow-camera-bottom={-10}
             />
             <ambientLight intensity={3} />
         </>

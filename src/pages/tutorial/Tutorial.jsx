@@ -20,6 +20,7 @@ export const TutorialLevel = () => {
                     far: 300,
                     position: [5, 4, 5]
                 }}
+                shadows={true}
             >
                 <PerspectiveCamera makeDefault position={[0, 10, 20]} />
                 <CameraControls />

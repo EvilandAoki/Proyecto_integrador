@@ -10,8 +10,13 @@ const actionInputMap = [
     {name: 'backward', keys: [ 'ArrowDown', 'KeyS']},
     {name: 'leftward', keys: [ 'ArrowLeft', 'KeyA']},
     {name: 'rightward', keys: [ 'ArrowRight', 'KeyD']},
-    {name: 'boost', keys: [ 'Space'] }
+    {name: 'brake', keys: [ 'Space'] }
 ]
+
+const getDegree = (value) => {
+    return (2 * Math.acos(value) * 180) / Math.PI
+}
+
 
 export const CarControls = () => {
 
@@ -19,30 +24,113 @@ export const CarControls = () => {
     const [subcribeKeys, getKeys] = useKeyboardControls()
 
     useFrame((state, delta) => {
-        const { forward, backward, leftward, rightward } = getKeys();
+        const { brake, forward, backward, leftward, rightward } = getKeys();
         const {ref, body} = car;
 
-        const impulse = {x: 0, y: 0, z: 0};
+        let impulse = {x: 0, y: 0, z: 0};
+        const impulseStrength = 10;
+        const quaternion = quat(body.rotation())
 
-        const impulseStrength = 2;
+        const currDirection  = getDegree(body.rotation().y);
 
         if(forward){
-            impulse.z -= impulseStrength
+            impulse = drive(currDirection, impulse, impulseStrength)
         }
         if(backward){
-            impulse.z += impulseStrength
+            impulse = drive(currDirection, impulse, impulseStrength, true)
         }
         if(rightward){
-            const quaternion = quat(body.rotation())
-            quaternion.y = Math.PI / 0.25
+            if(359.5 < getDegree(quaternion.y)){
+                quaternion.y = 1
+            } else {
+                quaternion.y -= 0.08
+            }
             body.setRotation(quaternion, true)
         }
         if(leftward){
-            impulse.x -= impulseStrength
+            if(0.5 >  getDegree(quaternion.y)){
+                quaternion.y = -1
+            } else {
+                quaternion.y += 0.08
+            }
+            body.setRotation(quaternion, true)
         }
-
+        if(brake){
+            impulse.z = 0
+        }
+        
         body?.applyImpulse(impulse, true);
     })
+
+    const drive = (currDirection, currImpulse, impulseStrength, reverse = false) => {
+        const newImpulse = { ...currImpulse }
+        let aux = 0;
+        let z = 0;
+        let x = 0;
+        if(currDirection >= 0 && currDirection < 90){
+            console.log('1')
+            z =  ((90-currDirection)/90) * impulseStrength
+            x = (currDirection/90) * impulseStrength
+            if(!reverse){
+                newImpulse.z -= z
+                newImpulse.x += x
+            } else {
+                newImpulse.z += z
+                newImpulse.x -= x
+            }
+            
+            console.log('Z: ', newImpulse.z)
+            console.log('X: ', newImpulse.x )
+        }
+        if(currDirection >= 90 && currDirection < 180){
+            console.log('2')
+            aux = currDirection - 90
+            z = (aux/90) * impulseStrength;
+            x = ((90-aux)/90) * impulseStrength
+            if(!reverse){
+                newImpulse.z +=  z
+                newImpulse.x +=  x
+            } else {
+                newImpulse.z -=  z
+                newImpulse.x -=  x
+            }
+            
+            console.log('Z: ', newImpulse.z)
+            console.log('X: ', newImpulse.x )
+        }
+        if(currDirection >= 180 && currDirection < 270){
+            console.log('3')
+            aux = currDirection - 180
+            z = ((90-aux)/90) * impulseStrength
+            x = (aux/90) * impulseStrength
+            if(!reverse){
+                newImpulse.z += z
+                newImpulse.x -= x
+            }else {
+                newImpulse.z -= z
+                newImpulse.x += x
+            }
+            
+            console.log('Z: ', newImpulse.z)
+            console.log('X: ', newImpulse.x )
+        }
+        if(currDirection >= 270 && currDirection <= 360){
+            console.log('4')
+            aux = currDirection - 270
+            z = (aux/90) * impulseStrength;
+            x = ((90-aux)/90) * impulseStrength
+            if(!reverse){
+                newImpulse.z -= z
+                newImpulse.x -= x
+            } else {
+                newImpulse.z += z
+                newImpulse.x += x
+            }
+            console.log('Z: ', newImpulse.z)
+            console.log('X: ', newImpulse.x )
+        }
+        return newImpulse
+    }
 }
 
 export const CarKeyboardControls = ({children}) => <KeyboardControls map={actionInputMap}>{children}</KeyboardControls>

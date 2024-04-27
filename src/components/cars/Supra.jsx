@@ -1,6 +1,6 @@
 import {useRef, useEffect } from "react"
 import { useGLTF } from "@react-three/drei"
-import { RigidBody } from "@react-three/rapier"
+import { RigidBody, quat } from "@react-three/rapier"
 import { useCarContext } from "../../context"
 
 const Supra = (props) => {
@@ -19,10 +19,11 @@ const Supra = (props) => {
 
   console.log(nodes, "nodes")
   console.log(materials, "materiales")
+  
 
   return (<>
-    <group {...props} dispose={null}>
-      <RigidBody ref={supraBodyRef} type="dynamic" colliders="hull"  restitution={0.2} friction={1}  position={[0, 0, 5]}>
+    <group  {...props} dispose={null}>
+      <RigidBody ref={supraBodyRef}  type="dynamic" colliders="hull"  restitution={0.2} friction={1}  position={[0, 5, 5]} >
         <group ref={supraRef}>
           <group>
             <mesh geometry={nodes.car_1.geometry} material={materials.main_color} />

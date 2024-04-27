@@ -13,6 +13,7 @@ export const Experience = () => {
             <FlyControls />
             <ambientLight intensity={0.5} />
             <Physics debug={true}>
+               
                 <Supra />
                 <Porsche />
                 <WorldOne />

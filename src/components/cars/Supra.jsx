@@ -1,17 +1,29 @@
+import {useRef, useEffect } from "react"
 import { useGLTF } from "@react-three/drei"
 import { RigidBody } from "@react-three/rapier"
+import { useCarContext } from "../../context"
 
-export const Supra = (props) => {
+const Supra = (props) => {
   const { nodes, materials } = useGLTF('/assets/models/cars/supra_blender.glb')
+  const {setCar} = useCarContext()
+
+  const supraBodyRef = useRef()
+  const supraRef = useRef()
+
+  useEffect(() => {
+    setCar({
+      ref: supraRef.current,
+      body: supraBodyRef.current
+    })
+  }, [supraBodyRef?.current, supraRef?.current])
 
   console.log(nodes, "nodes")
   console.log(materials, "materiales")
 
-  return (
-
+  return (<>
     <group {...props} dispose={null}>
-      <RigidBody colliders="hull"  position={[2, 10, 5]}>
-        <group>
+      <RigidBody ref={supraBodyRef} type="dynamic" colliders="hull"  restitution={0.2} friction={1}  position={[0, 0, 5]}>
+        <group ref={supraRef}>
           <group>
             <mesh geometry={nodes.car_1.geometry} material={materials.main_color} />
             <mesh geometry={nodes.car_2.geometry} material={materials.dark_plastic} />
@@ -41,5 +53,8 @@ export const Supra = (props) => {
         </group>
       </RigidBody>
     </group>
+    </>
   )
 }
+
+export default Supra

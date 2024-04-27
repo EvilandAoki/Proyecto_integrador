@@ -1,14 +1,15 @@
-import { AuthProvider } from "./context/context/AuthProvider";
+import { AuthProvider, CarProvider } from "./context";
 import { GameRoutes } from "./routes/GameRoutes";
-import { GameProvider } from "./context/gameContext/GameProvider"
+
 
 function App() {
 
   return (
-    <GameRoutes>
-      <AuthProvider />
-      <GameProvider />
-    </GameRoutes>
+      <AuthProvider>
+        <CarProvider>
+          <GameRoutes/>
+        </CarProvider>
+      </ AuthProvider >
   )
 }
 

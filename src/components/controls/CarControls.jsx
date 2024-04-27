@@ -25,7 +25,11 @@ export const CarControls = () => {
     useFrame((state, delta) => {
         const { forward, backward, leftward, rightward, boost } = getKeys();
         const { ref, body } = car;
+        const bodyPosition = new Vector3(body?.translation().x, body?.rotation().y, body?.translation().z)
 
+        console.log(bodyPosition, "cambia con los frames?")
+        console.log(bodyPosition.y, "y")
+        console.log(bodyPosition.x, "x")
         const impulse = { x: 0, y: 0, z: 0 };
 
         const impulseStrength = 2;
@@ -36,9 +40,9 @@ export const CarControls = () => {
             body.applyImpulse(new Vector3(0, 0, -velocity), true)
         }
         if (rightward) {
-            body.setRotation(quat(new Vector3(0, Math.PI, 0)))
+            body.setRotation(quat(new Vector3(0, bodyPosition.y + Math.PI, 0)))
         } else if (leftward) {
-            body.setRotation(quat(new Vector3(0, -Math.PI, 0)))
+            body.setRotation(quat(new Vector3(0, bodyPosition.y - (Math.PI * 0.1), 0)))
         } else if (boost && forward) {
             body.applyImpulse(new Vector3(0, 0, velocity * 2), true)
         }

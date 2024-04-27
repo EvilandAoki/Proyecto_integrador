@@ -26,12 +26,12 @@ const Supra = (props) => {
 
   return (<>
     <group  {...props} dispose={null}>
-      <RigidBody ref={supraBodyRef} type="dynamic" colliders="hull" restitution={0.2} friction={1} position={[0, 5, 5]} >
-        <group castShadow={true} ref={supraRef}>
-          <group >
-            <mesh castShadow={true} geometry={nodes.car_1.geometry} material={materials.main_color} />
-            <mesh castShadow={true} geometry={nodes.car_2.geometry} material={materials.dark_plastic} />
-            <mesh castShadow={true} geometry={nodes.car_3.geometry} material={materials.back_ligths} />
+      <RigidBody ref={supraBodyRef}  type="dynamic" colliders="hull"  restitution={0.2} friction={1}  position={[0, 5, 5]} >
+        <group ref={supraRef}>
+          <group>
+            <mesh geometry={nodes.car_1.geometry} material={materials.main_color} />
+            <mesh geometry={nodes.car_2.geometry} material={materials.dark_plastic} />
+            <mesh geometry={nodes.car_3.geometry} material={materials.back_ligths} />
 
             <group>
               <mesh castShadow={true} geometry={nodes.wheel_FL_1.geometry} material={materials.tire} />

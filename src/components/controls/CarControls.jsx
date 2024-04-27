@@ -32,7 +32,8 @@ export const CarControls = () => {
         const {ref, body} = car;
 
         let impulse = {x: 0, y: 0, z: 0};
-        const impulseStrength = 10;
+        const impulseStrength = 5;
+        const rotationalSpeed = 0.1;
         const quaternion = quat(body.rotation())
 
         const currDirection  = getDegree(body.rotation().y);
@@ -44,25 +45,33 @@ export const CarControls = () => {
             impulse = drive(currDirection, impulse, impulseStrength, true)
         }
         if(rightward){
-            if(359.5 < getDegree(quaternion.y)){
+            if(359.5 < currDirection){
                 quaternion.y = 1
+            } else if (345 < currDirection || 15 > currDirection) {
+                console.log(-1*rotationalSpeed)
+                quaternion.y -= rotationalSpeed
             } else {
-                quaternion.y -= 0.08
+                quaternion.y -= rotationalSpeed / 10
+                console.log(-1*rotationalSpeed/10)
             }
             body.setRotation(quaternion, true)
         }
         if(leftward){
-            if(0.5 >  getDegree(quaternion.y)){
+            if(0.5 >  currDirection){
                 quaternion.y = -1
+            } else if (345 < currDirection || 15 > currDirection) {
+                quaternion.y += rotationalSpeed
+                console.log( rotationalSpeed)
             } else {
-                quaternion.y += 0.08
+                quaternion.y += rotationalSpeed / 10
+                console.log(rotationalSpeed / 10)
             }
             body.setRotation(quaternion, true)
         }
         if(brake){
             impulse.z = 0
         }
-        
+        //console.log(currDirection)
         body?.applyImpulse(impulse, true);
     })
 
@@ -135,6 +144,7 @@ export const CarControls = () => {
         }
         return newImpulse
     }
+    
 }
 
 export const CarKeyboardControls = ({children}) => <KeyboardControls map={actionInputMap}>{children}</KeyboardControls>

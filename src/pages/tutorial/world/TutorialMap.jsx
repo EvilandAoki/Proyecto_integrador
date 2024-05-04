@@ -1,11 +1,10 @@
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
-import { RigidBody } from '@react-three/rapier'
+
 
 export const TutorialMap = (props) => {
     const { nodes, materials } = useGLTF('/assets/models/maps/tutorial/MapaTutorial.glb')
     return (
-        <RigidBody colliders="trimesh" type='fixed'>
             <group {...props} dispose={null}>
                 <mesh
                     receiveShadow={true}
@@ -22,6 +21,5 @@ export const TutorialMap = (props) => {
                     material={materials['Material.002']}
                 />
             </group>
-        </RigidBody>
     )
 }

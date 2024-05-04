@@ -1,40 +1,42 @@
 import { Suspense, useRef } from "react"
 import { Canvas } from "@react-three/fiber"
-import { LightsOne } from "../levelOne/lights/LightsOne"
-import { CameraControls, FlyControls, MotionPathControls, OrbitControls, PerspectiveCamera } from "@react-three/drei"
-import { Physics } from "@react-three/rapier"
+import { OrbitControls, } from "@react-three/drei"
 import { Perf } from "r3f-perf"
 import { TutorialMap } from "./world/TutorialMap"
 import { LightsTutorial } from "./lights/lightsTutorial"
 import Supra from "../../components/cars/Supra"
-import CarControls, { CarKeyboardControls } from "../../components/controls/CarControls"
+import { Debug, Physics } from "@react-three/cannon"
+
 
 export const TutorialLevel = () => {
 
     return (
-        <CarKeyboardControls>
-            <Canvas
-                camera={{
-                    fov: 45,
-                    near: 0.7,
-                    far: 300,
-                    position: [5, 4, 5]
-                }}
-                shadows={true}
+        <Canvas
+            camera={{
+                fov: 45,
+                near: 0.7,
+                far: 300,
+                position: [5, 4, 5]
+            }}
+            shadows={true}
+        >
+            <OrbitControls makeDefault />
+            <color attach="background" args={["#ececec"]} />
+            <LightsTutorial />
+            <Physics
+                broadphase="SAP"
+                gravity={[0, -9.8, 0]}
+                frictionGravity={[0, 1, 0]}
+                defaultContactMaterial={{ restitution: 0.3 }}
             >
-                <PerspectiveCamera makeDefault position={[0, 10, 20]} />
-                <CameraControls />
-                <color attach="background" args={["#ececec"]} />
-                <LightsTutorial />
-                <Physics debug={true}>
+                <Debug color="red">
                     <Suspense>
                         <TutorialMap />
                         <Supra />
                     </Suspense>
-                </Physics>
-                <Perf />
-                <CarControls />
-            </Canvas>
-        </CarKeyboardControls>
+                </Debug>
+            </Physics>
+            <Perf />
+        </Canvas>
     )
 }

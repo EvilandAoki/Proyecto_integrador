@@ -6,6 +6,7 @@ import { TutorialMap } from "./world/TutorialMap"
 import { LightsTutorial } from "./lights/lightsTutorial"
 import Supra from "../../components/cars/Supra"
 import { Debug, Physics } from "@react-three/cannon"
+import { CubeCar } from "../../components/cars/CubeCar"
 
 
 export const TutorialLevel = () => {
@@ -32,6 +33,7 @@ export const TutorialLevel = () => {
                 <Debug color="red">
                     <Suspense>
                         <TutorialMap />
+                        <CubeCar/>
                         <Supra />
                     </Suspense>
                 </Debug>

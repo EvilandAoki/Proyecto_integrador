@@ -16,19 +16,19 @@ export const useWheels = (width, height, front, radius) => {
     maxSuspensionForce: 100000,
     rollInfluence: 0.01,
     maxSuspensionTravel: 0.1,
-    customSlidingRotationalSpeed: -30,
+    customSlidingRotationalSpeed: -40,
     useCustomSlidingRotationalSpeed: true,
   };
 
   const wheelInfos = [
     {
       ...wheelInfo,
-      chassisConnectionPointLocal: [-width * 0.65, height * 0.4, front],
+      chassisConnectionPointLocal: [-width * 0.6, height * 0.3, front],
       isFrontWheel: true,
     },
     {
       ...wheelInfo,
-      chassisConnectionPointLocal: [width * 0.65, height * 0.4, front],
+      chassisConnectionPointLocal: [width * 0.6, height * 0.4, front],
       isFrontWheel: true,
     },
     {

@@ -1,45 +1,47 @@
-import { Suspense } from "react"
+
+import { Suspense, useState } from "react"
 import { Canvas } from "@react-three/fiber"
-import { LightsOne } from "../levelOne/lights/LightsOne"
-import { CameraControls, FlyControls, MotionPathControls, OrbitControls, PerspectiveCamera } from "@react-three/drei"
-import { Physics } from "@react-three/rapier"
+import { OrbitControls, PerspectiveCamera, } from "@react-three/drei"
 import { Perf } from "r3f-perf"
 import { TutorialMap } from "./world/TutorialMap"
 import { LightsTutorial } from "./lights/lightsTutorial"
 import Supra from "../../components/cars/Supra"
-import CarControls, { CarKeyboardControls } from "../../components/controls/CarControls"
-import Tire from "../../components/Tire"
+
+import { Debug, Physics } from "@react-three/cannon"
+import { CubeCar } from "../../components/cars/CubeCar"
+
 
 export const TutorialLevel = () => {
+    const [thirdPerson, setThirdPerson] = useState(true);
+    const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
 
     return (
-        <CarKeyboardControls>
-            <Canvas
-                camera={{
-                    fov: 45,
-                    near: 0.7,
-                    far: 300,
-                    position: [5, 4, 5]
-                }}
-                shadows={true}
+        <Canvas
+            shadows={true}
+        >
+            <PerspectiveCamera makeDefault position={cameraPosition} fov={80} />
+            {!thirdPerson && (
+                <OrbitControls target={[-2.64, -0.71, 0.03]} />
+            )}
+            <LightsTutorial />
+            <Physics
+                broadphase="SAP"
+                gravity={[0, -9.8, 0]}
+                frictionGravity={[0, 1, 0]}
+                defaultContactMaterial={{ restitution: 0.3 }}
             >
-                <PerspectiveCamera makeDefault position={[0, 10, 20]} />
-                <CameraControls />
-                <color attach="background" args={["#ececec"]} />
-                <LightsTutorial />
-                <Physics debug={false}>
+                <Debug color="red">
+
+                    <color attach="background" args={["#ececec"]} />
+                    <LightsTutorial />
                     <Suspense>
                         <TutorialMap />
+                        <CubeCar thirdPerson={thirdPerson} />
                         <Supra />
-                        <Tire pos={[10, 0.5, 5]} />
-                        <Tire pos={[-80, 0.5, -92]} />
-                        <Tire pos={[85, 0.5, -10]} />
-                        <Tire pos={[-50, 0.5, -30]} />
                     </Suspense>
-                </Physics>
-                <Perf />
-                <CarControls />
-            </Canvas>
-        </CarKeyboardControls>
+                </Debug>
+            </Physics>
+            <Perf />
+        </Canvas>
     )
 }

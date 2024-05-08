@@ -23,7 +23,6 @@ export const TutorialLevel = () => {
             {!thirdPerson && (
                 <OrbitControls target={[-2.64, -0.71, 0.03]} />
             )}
-            <color attach="background" args={["#ececec"]} />
             <LightsTutorial />
             <Physics
                 broadphase="SAP"
@@ -33,19 +32,12 @@ export const TutorialLevel = () => {
             >
                 <Debug color="red">
 
-                <PerspectiveCamera makeDefault position={[0, 10, 20]} />
-                <CameraControls />
-                <color attach="background" args={["#ececec"]} />
-                <LightsTutorial />
-                <Physics debug={false}>
+                    <color attach="background" args={["#ececec"]} />
+                    <LightsTutorial />
                     <Suspense>
                         <TutorialMap />
                         <CubeCar thirdPerson={thirdPerson} />
                         <Supra />
-                        <Tire pos={[10, 0.5, 5]} />
-                        <Tire pos={[-80, 0.5, -92]} />
-                        <Tire pos={[85, 0.5, -10]} />
-                        <Tire pos={[-50, 0.5, -30]} />
                     </Suspense>
                 </Debug>
             </Physics>

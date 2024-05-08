@@ -1,6 +1,6 @@
-import { Suspense, useRef } from "react"
+import { Suspense, useState } from "react"
 import { Canvas } from "@react-three/fiber"
-import { OrbitControls, } from "@react-three/drei"
+import { OrbitControls, PerspectiveCamera, } from "@react-three/drei"
 import { Perf } from "r3f-perf"
 import { TutorialMap } from "./world/TutorialMap"
 import { LightsTutorial } from "./lights/lightsTutorial"
@@ -10,18 +10,17 @@ import { CubeCar } from "../../components/cars/CubeCar"
 
 
 export const TutorialLevel = () => {
+    const [thirdPerson, setThirdPerson] = useState(true);
+    const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
 
     return (
         <Canvas
-            camera={{
-                fov: 45,
-                near: 0.7,
-                far: 300,
-                position: [5, 4, 5]
-            }}
             shadows={true}
         >
-            <OrbitControls makeDefault />
+            <PerspectiveCamera makeDefault position={cameraPosition} fov={80} />
+            {!thirdPerson && (
+                <OrbitControls target={[-2.64, -0.71, 0.03]} />
+            )}
             <color attach="background" args={["#ececec"]} />
             <LightsTutorial />
             <Physics
@@ -33,7 +32,7 @@ export const TutorialLevel = () => {
                 <Debug color="red">
                     <Suspense>
                         <TutorialMap />
-                        <CubeCar/>
+                        <CubeCar thirdPerson={thirdPerson} />
                         <Supra />
                     </Suspense>
                 </Debug>

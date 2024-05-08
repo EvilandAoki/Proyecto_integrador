@@ -1,3 +1,4 @@
+
 import { Suspense, useState } from "react"
 import { Canvas } from "@react-three/fiber"
 import { OrbitControls, PerspectiveCamera, } from "@react-three/drei"
@@ -5,6 +6,7 @@ import { Perf } from "r3f-perf"
 import { TutorialMap } from "./world/TutorialMap"
 import { LightsTutorial } from "./lights/lightsTutorial"
 import Supra from "../../components/cars/Supra"
+
 import { Debug, Physics } from "@react-three/cannon"
 import { CubeCar } from "../../components/cars/CubeCar"
 
@@ -30,10 +32,20 @@ export const TutorialLevel = () => {
                 defaultContactMaterial={{ restitution: 0.3 }}
             >
                 <Debug color="red">
+
+                <PerspectiveCamera makeDefault position={[0, 10, 20]} />
+                <CameraControls />
+                <color attach="background" args={["#ececec"]} />
+                <LightsTutorial />
+                <Physics debug={false}>
                     <Suspense>
                         <TutorialMap />
                         <CubeCar thirdPerson={thirdPerson} />
                         <Supra />
+                        <Tire pos={[10, 0.5, 5]} />
+                        <Tire pos={[-80, 0.5, -92]} />
+                        <Tire pos={[85, 0.5, -10]} />
+                        <Tire pos={[-50, 0.5, -30]} />
                     </Suspense>
                 </Debug>
             </Physics>

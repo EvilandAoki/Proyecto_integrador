@@ -29,7 +29,7 @@ export const TutorialLevel = () => {
                 frictionGravity={[0, 1, 0]}
                 defaultContactMaterial={{ restitution: 0.3 }}
             >
-                <Debug color="red">
+            <Debug color="red">
                     <Suspense>
                         <TutorialMap />
                         <CubeCar thirdPerson={thirdPerson} />

@@ -10,10 +10,10 @@ const Supra = (props) => {
   const { nodes, materials } = useGLTF('/assets/models/cars/supra_blender.glb')
 
   const position = [10, 0.5, 10];
-  const width = 3;
+  const width = 1.5;
   const height = 0.5;
-  const front = 2;
-  const wheelRadius = 0.3;
+  const front = 3;
+  const wheelRadius = 0.2;
 
   const chassisBodyArgs = [width, height, front];
 

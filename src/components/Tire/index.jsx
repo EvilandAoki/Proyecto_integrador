@@ -1,52 +1,68 @@
 import { useFrame } from "@react-three/fiber";
-import { RigidBody } from "@react-three/rapier"
+//import { RigidBody } from "@react-three/rapier"
 import { useRef } from "react";
-import bounceSound from '../effects/sounds/basketball-bounce.mp3';
+import bounceSound from "../effects/sounds/basketball-bounce.mp3";
+import { useCylinder } from "@react-three/cannon";
 
-const amplitude = 6
+const amplitude = 6;
 const gravity = 0.005;
 
-function Tire({ pos }) {
+const Tire = ({ pos }) => {
     const tireRef = useRef();
-    const tireBodyRef = useRef();
-    const upwardVelocity = useRef(0);
+    const upwardVelocity = useRef()
 
-   // const audio = new Audio(bounceSound);
+    // Crear un cuerpo físico con forma de cilindro para la llanta
+    const [cylinderBody, cylinderApi] = useCylinder(() => ({
+        mass: 1, // Masa del objeto
+        position: pos, // Posición inicial del objeto
+        args: [1, 1, 0.5], // Radio superior, radio inferior, altura del cilindro
+        rotation: [Math.PI / 2, Math.PI / 2, 0], // Rotación inicial del cilindro
+        linearDamping: 0.1, // Amortiguación lineal para simular rebote
+        //type: "Dynamic"
+        allowSleep: true
+    }));
+    console.log("cylinderApi", cylinderApi);
+    console.log("cylinderBody", cylinderBody);
+    // Hacer que la llanta rebote constantemente
+
     useFrame(({clock}) => {
-    // Aplicar la gravedad
-    upwardVelocity.current -= gravity;
-    // Hacer que la llanta rebote
-    if (tireRef.current.position.y <= 0) {
-      upwardVelocity.current = Math.abs(upwardVelocity.current) * 0.98; // Factor de rebote
-      //audio.play();
-    }
-    tireRef.current.position.y += upwardVelocity.current;
-    tireRef.current.rotation.y += 0.01;
-    const moveX = Math.cos(clock.getElapsedTime()) * amplitude + pos[0];
-
-    tireBodyRef.current?.setTranslation({
-            x:  tireBodyRef.current?.translation().x,
-            y:   tireBodyRef.current?.translation().y,
-            z:  moveX
-        }, true)
+        upwardVelocity.current -= gravity;
+        // Hacer que la llanta rebote
+        /* if (tireRef.current.position.y <= 0) {
+          upwardVelocity.current = Math.abs(upwardVelocity.current) * 0.98; // Factor de rebote;
+        } */
+        //console.log(cylinderBody.current)
+    
+        /* tireBodyRef.current?.setTranslation({
+                x:  tireBodyRef.current?.translation().x,
+                y:   tireBodyRef.current?.translation().y,
+                z:  moveX
+            }, true)
+        }); */
     });
 
+    useFrame(({clock}) => {
+        //console.log(clock)
+        
+        //cylinderApi.applyImpulse([0, 0.09, 0], [0, 0, 0])
+    })
+
     return (
-        <RigidBody ref={tireBodyRef} type="fixed" position={pos}>
-            <group ref={tireRef}>
+        <group ref={cylinderBody} position={pos}>
+            <group ref={tireRef} rotation={[Math.PI / 2, 0, 0]}>
                 {/* Llanta exterior */}
                 <mesh>
-                <torusGeometry args={[1, 0.5, 16, 100]} />
-                <meshStandardMaterial color="#2B2A29" />
+                    <torusGeometry args={[0.7, 0.35, 16, 100]} />
+                    <meshStandardMaterial color="#2B2A29" />
                 </mesh>
                 {/* Llanta interior */}
                 <mesh position={[0, 0, -0.25]}>
-                <torusGeometry args={[0.5, 0.25, 16, 100]} />
-                <meshStandardMaterial color="gray" />
+                    <torusGeometry args={[0.35, 0.1525, 16, 100]} />
+                    <meshStandardMaterial color="gray" />
                 </mesh>
             </group>
-        </RigidBody>
+        </group>
     );
-}
+};
 
-export default Tire;
+export default Tire;

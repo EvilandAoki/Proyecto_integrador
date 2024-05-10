@@ -1,13 +1,31 @@
 import { useBox, useRaycastVehicle } from "@react-three/cannon";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useWheels } from "../../hooks/useWheels";
 import { WheelDebug } from "./WheelDebug";
 import { useControls } from "../../hooks/useControls";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
 import { Quaternion, Vector3 } from "three";
+import { GLTFLoader } from "three/examples/jsm/Addons.js";
 
 
 export const CubeCar = ({ thirdPerson }) => {
+
+    let result = useLoader(
+        GLTFLoader,
+        "/assets/models/cars/car.glb"
+    ).scene;
+
+    console.log(result)
+
+    useEffect(() => {
+        if (!result) return;
+
+        let mesh = result;
+        mesh.scale.set(0.0012, 0.0012, 0.0012);
+
+        mesh.children[0].position.set(-365, -18, -67);
+    }, [result]);
+
 
 
     const position = [-1.5, 0.5, 3];
@@ -35,13 +53,15 @@ export const CubeCar = ({ thirdPerson }) => {
     )
 
     useControls(vehicleApi, chassisApi)
-    
+
     useFrame((state) => {
         if (!thirdPerson) return;
 
         let position = new Vector3(0, 0, 0);
         position.setFromMatrixPosition(chassisBody.current.matrixWorld);
 
+        console.log(position)
+        
         let quaternion = new Quaternion(0, 0, 0, 0);
         quaternion.setFromRotationMatrix(chassisBody.current.matrixWorld);
 
@@ -54,14 +74,19 @@ export const CubeCar = ({ thirdPerson }) => {
         wDir.add(new Vector3(0, 0.2, 0));
         state.camera.position.copy(cameraPosition);
         state.camera.lookAt(position);
+
+     
     });
 
     return (
         <group ref={vehicle} name="vehicle">
-            <mesh ref={chassisBody}>
+            {/* <mesh ref={chassisBody}>
                 <meshBasicMaterial transparent={true} opacity={0.4} />
                 <boxGeometry args={chassisBodyArgs} />
-            </mesh>
+            </mesh> */}
+            <group ref={chassisBody} name="chassisBody">
+                <primitive object={result} rotation-y={Math.PI} position={[0, -0.09, 0]} />
+            </group>
             <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
             <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
             <WheelDebug wheelRef={wheels[2]} radius={wheelRadius} />

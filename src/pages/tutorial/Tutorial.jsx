@@ -38,7 +38,7 @@ export const TutorialLevel = () => {
                     <Suspense>
                         <TutorialMap />
                         <CubeCar thirdPerson={thirdPerson} />
-                        <Supra />
+                        {/* <Supra /> */}
                         <Tire pos={[0, 0, 0]} />
                     </Suspense>
                 </Debug>

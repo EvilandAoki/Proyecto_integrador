@@ -4,68 +4,39 @@ import { RigidBody, quat } from "@react-three/rapier"
 import { useCarContext } from "../../context"
 import { useBox, useRaycastVehicle } from "@react-three/cannon"
 import { useWheels } from "../../hooks/useWheels"
+import { useLoader } from "@react-three/fiber"
 
 
-const Supra = (props) => {
-  const { nodes, materials } = useGLTF('/assets/models/cars/supra_blender.glb')
+const Supra = ({ thirdPerson }) => {
 
-  const position = [10, 0.5, 10];
-  const width = 1.5;
-  const height = 0.5;
-  const front = 3;
-  const wheelRadius = 0.2;
+  const position = [-2, 0.3, 6];
+  const width = 0.15;
+  const height = 0.07;
+  const front = 0.15;
+  const wheelRadius = 0.05;
 
-  const chassisBodyArgs = [width, height, front];
+  const chassisBodyArgs = [width, height, front * 2];
+
+  let result = useLoader(
+    GLTFLoader,
+    "/assets/models/cars/car.glb"
+  ).scene
+
+  useEffect(() => {
+    if (!result) return;
+
+    let mesh = result;
+    mesh.scale.set(0.0020, 0.0020, 0.0020);
+
+    mesh.children[0].position.set(-400, -30, -40);
+  }, [result]);
 
   const [chassisBody, chassisApi] = useBox(
     () => ({ args: chassisBodyArgs, mass: 150, position }),
     useRef(null)
   )
-
-
   const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 
-  const [vehicle, vehicleApi] = useRaycastVehicle(
-    () => ({
-      chassisBody,
-      wheelInfos,
-      wheels,
-    }),
-    useRef(null)
-  )
-
-
-  return (<>
-
-
-    <group  {...props} ref={vehicle} dispose={null} >
-
-      <group ref={chassisBody}>
-        <mesh castShadow={true} geometry={nodes.car_1.geometry} material={materials.main_color} />
-        <mesh castShadow={true} geometry={nodes.car_2.geometry} material={materials.dark_plastic} />
-        <mesh castShadow={true} geometry={nodes.car_3.geometry} material={materials.back_ligths} />
-      </group>
-
-      <group ref={wheels[0]}>
-        <mesh castShadow={true} geometry={nodes.wheel_FL_1.geometry} material={materials.tire} />
-        <mesh castShadow={true} geometry={nodes.wheel_FL_2.geometry} material={materials.rims} />
-      </group>
-      <group ref={wheels[1]}>
-        <mesh castShadow={true} geometry={nodes.wheel_FR_1.geometry} material={materials.tire} />
-        <mesh castShadow={true} geometry={nodes.wheel_FR_2.geometry} material={materials.rims} />
-      </group>
-      <group ref={wheels[2]} >
-        <mesh castShadow={true} geometry={nodes.wheel_RL_1.geometry} material={materials.tire} />
-        <mesh castShadow={true} geometry={nodes.wheel_RL_2.geometry} material={materials.rims} />
-      </group>
-      <group ref={wheels[3]} >
-        <mesh castShadow={true} geometry={nodes.wheel_RR_1.geometry} material={materials.tire} />
-        <mesh castShadow={true} geometry={nodes.wheel_RR_2.geometry} material={materials.rims} />
-      </group>
-    </group>
-
-  </>
-  )
 }
 
 export default Supra

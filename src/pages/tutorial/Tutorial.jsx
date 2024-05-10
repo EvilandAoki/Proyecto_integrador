@@ -9,6 +9,7 @@ import Supra from "../../components/cars/Supra"
 
 import { Debug, Physics } from "@react-three/cannon"
 import { CubeCar } from "../../components/cars/CubeCar"
+import Tire from "../../components/Tire"
 
 
 export const TutorialLevel = () => {
@@ -37,7 +38,8 @@ export const TutorialLevel = () => {
                     <Suspense>
                         <TutorialMap />
                         <CubeCar thirdPerson={thirdPerson} />
-                        <Supra />
+                        {/* <Supra /> */}
+                        <Tire pos={[0, 0, 0]} />
                     </Suspense>
                 </Debug>
             </Physics>

@@ -35,3 +35,19 @@ body {
 .bg-login{
   background-color: rgba(248, 249, 250, 0.1);
 }
+
+.velocimetro{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+.lifes{
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.lifes img{
+  max-width: 30px;
+  margin-right: 5px;
+}

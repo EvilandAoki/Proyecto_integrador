@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { usePlane } from '@react-three/cannon'
+import { useBox, usePlane } from '@react-three/cannon'
 
 
 export const TutorialMap = (props) => {
@@ -9,7 +9,7 @@ export const TutorialMap = (props) => {
     // Aplicar físicas de plano al piso
     const [floorPlane] = usePlane(() => ({
         rotation: [-Math.PI / 2, 0, 0],
-        position: [0, -1, 0], // Posición del piso
+        position: [0, -0.81, 0], // Posición del piso
         type: 'trimesh',
         args: [100, 100]
     }));

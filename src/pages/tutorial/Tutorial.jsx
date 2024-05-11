@@ -5,7 +5,10 @@ import { OrbitControls, PerspectiveCamera, } from "@react-three/drei"
 import { Perf } from "r3f-perf"
 import { TutorialMap } from "./world/TutorialMap"
 import { LightsTutorial } from "./lights/lightsTutorial"
+import AceleracionVelocimetro from "./../../components/controls/Speedometer"
+import LivesDisplay from "./../../components/controls/Lifes"
 import Supra from "../../components/cars/Supra"
+import { Vector3 } from "three";
 
 import { Debug, Physics } from "@react-three/cannon"
 import { CubeCar } from "../../components/cars/CubeCar"
@@ -18,6 +21,12 @@ import { SiTurbo } from "react-icons/si";
 export const TutorialLevel = () => {
     const [thirdPerson, setThirdPerson] = useState(true);
     const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
+    const [aceleracion, setAceleracion] = useState(0);
+
+    const handleFrame = (newAceleracion) => {
+        setAceleracion(newAceleracion);
+    };
+
     const { car } = useCarContext()
 
     return (
@@ -30,6 +39,7 @@ export const TutorialLevel = () => {
                     <OrbitControls target={[-2.64, -0.71, 0.03]} />
                 )}
                 <LightsTutorial />
+            
                 <Physics
                     broadphase="SAP"
                     gravity={[0, -9.8, 0]}
@@ -57,8 +67,12 @@ export const TutorialLevel = () => {
                         </Suspense>
                     </Debug>
                 </Physics>
+            
                 <Perf />
+            
             </Canvas>
+        <AceleracionVelocimetro aceleracion={aceleracion} />
+        <LivesDisplay lives={2} />
             <div style={{position: "absolute", top: 1, rigth: 2}} className="boder pt-4 ps-4">
                 {car.turbo && 
                     <div className="border border-info rounded shadow-lg p-2"> 

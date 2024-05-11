@@ -4,8 +4,7 @@ export const useControls = (vehicleApi, chassisApi) => {
 
   let [controls, setControls] = useState({});
   const [brakeForce, setBrakeForce] = useState(0);
-  console.log("vehicleApi", vehicleApi)
-  console.log("chassisApi", chassisApi)
+
   useEffect(() => {
     const keyDownPressHandler = (e) => {
       setControls((controls) => ({ ...controls, [e.key.toLowerCase()]: true }));
@@ -53,26 +52,17 @@ export const useControls = (vehicleApi, chassisApi) => {
       }
     }
 
-    if (controls.arrowdown) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, +1]);
-    if (controls.arrowup) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, -1]);
-    if (controls.arrowleft) chassisApi.applyLocalImpulse([0, -5, 0], [-0.5, 0, 0]);
-    if (controls.arrowright) chassisApi.applyLocalImpulse([0, -5, 0], [+0.5, 0, 0]);
+    // if (controls.arrowdown) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, +1]);
+    // if (controls.arrowup) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, -1]);
+    // if (controls.arrowleft) chassisApi.applyLocalImpulse([0, -5, 0], [-0.5, 0, 0]);
+    // if (controls.arrowright) chassisApi.applyLocalImpulse([0, -5, 0], [+0.5, 0, 0]);
 
     // TODO Poner aqui los controles del frenado
 
-  
-    const speed = chassisApi.current?.velocity;
-    console.log(speed)
-    // const maxBrakeForce = 20; // Máxima fuerza de frenado
-    // const minSpeedForBrake = 1; // Velocidad mínima para aplicar freno
-    // const newBrakeForce = Math.min(maxBrakeForce, speed - minSpeedForBrake);
-    // setBrakeForce(newBrakeForce);
-
-    // Aplicar freno cuando se presiona la barra espaciadora
     if (controls[" "]) {
-     
-      vehicleApi.setBrake(10, 2);
-      vehicleApi.setBrake(10, 3);
+
+      vehicleApi.setBrake(3, 2);
+      vehicleApi.setBrake(3, 3);
     } else {
       vehicleApi.setBrake(0, 0);
       vehicleApi.setBrake(0, 1);
@@ -80,6 +70,7 @@ export const useControls = (vehicleApi, chassisApi) => {
       vehicleApi.setBrake(0, 3);
     }
 
+   
     // TODO Finalizar aqui los controles del frenado
 
     //TODO Configurar la position de acuerdo a la position inicial del vehiculo

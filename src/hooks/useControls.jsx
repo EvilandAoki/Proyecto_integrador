@@ -1,11 +1,17 @@
+import { useFrame } from "@react-three/fiber";
 import { useEffect, useState } from "react";
+import { useCarContext } from "../context/CarControlsContext"
 
 export const useControls = (vehicleApi, chassisApi) => {
 
   let [controls, setControls] = useState({});
   const [brakeForce, setBrakeForce] = useState(0);
-  console.log("vehicleApi", vehicleApi)
-  console.log("chassisApi", chassisApi)
+  const [turboStartTime, setTurboStartTime] = useState(null);
+
+  const { car, setCarValue } = useCarContext()
+
+  //console.log("vehicleApi", vehicleApi)
+  //console.log("chassisApi", chassisApi)
   useEffect(() => {
     const keyDownPressHandler = (e) => {
       setControls((controls) => ({ ...controls, [e.key.toLowerCase()]: true }));
@@ -23,12 +29,29 @@ export const useControls = (vehicleApi, chassisApi) => {
     }
   }, []);
 
-  useEffect(() => {
+  useFrame((state) => {
     if (!vehicleApi || !chassisApi) return;
 
+    if(turboStartTime && ((Date.now() - turboStartTime) / 1000) > 0.5){ //Quitar el turbo despues de 2 segundos
+      setCarValue('turbo', false)
+      setTurboStartTime(null)
+    }
+
+    let speedMulti = 1;
+    if (controls.shift && car.turbo) {
+      if(!turboStartTime){ //Tomar el momento que se uso el turbo
+        setTurboStartTime(Date.now());
+      }
+      state.camera.fov = 100 
+      speedMulti = 2 
+    } else {
+      state.camera.fov = 80 
+      speedMulti =  1
+    }
+    
     if (controls.w) {
-      vehicleApi.applyEngineForce(150, 2);
-      vehicleApi.applyEngineForce(150, 3);
+        vehicleApi.applyEngineForce(150 * speedMulti, 2);
+        vehicleApi.applyEngineForce(150 * speedMulti, 3);
     } else if (controls.s) {
       vehicleApi.applyEngineForce(-150, 2);
       vehicleApi.applyEngineForce(-150, 3);
@@ -92,5 +115,4 @@ export const useControls = (vehicleApi, chassisApi) => {
   }, [controls, vehicleApi, chassisApi]);
 
   return controls;
-
 }

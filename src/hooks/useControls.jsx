@@ -7,6 +7,7 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
   //const [previousVelocity, setPreviousVelocity] = useState([0, 0, 0]);
 
 
+  const [brakeForce, setBrakeForce] = useState(0);
 
   useEffect(() => {
     const keyDownPressHandler = (e) => {
@@ -59,10 +60,26 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
       }
     }
 
-    if (controls.arrowdown) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, +1]);
-    if (controls.arrowup) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, -1]);
-    if (controls.arrowleft) chassisApi.applyLocalImpulse([0, -5, 0], [-0.5, 0, 0]);
-    if (controls.arrowright) chassisApi.applyLocalImpulse([0, -5, 0], [+0.5, 0, 0]);
+    // if (controls.arrowdown) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, +1]);
+    // if (controls.arrowup) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, -1]);
+    // if (controls.arrowleft) chassisApi.applyLocalImpulse([0, -5, 0], [-0.5, 0, 0]);
+    // if (controls.arrowright) chassisApi.applyLocalImpulse([0, -5, 0], [+0.5, 0, 0]);
+
+    // TODO Poner aqui los controles del frenado
+
+    if (controls[" "]) {
+
+      vehicleApi.setBrake(3, 2);
+      vehicleApi.setBrake(3, 3);
+    } else {
+      vehicleApi.setBrake(0, 0);
+      vehicleApi.setBrake(0, 1);
+      vehicleApi.setBrake(0, 2);
+      vehicleApi.setBrake(0, 3);
+    }
+
+   
+    // TODO Finalizar aqui los controles del frenado
 
     //TODO Configurar la position de acuerdo a la position inicial del vehiculo
     if (controls.r) {

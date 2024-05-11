@@ -1,5 +1,7 @@
+import { useFrame } from "@react-three/fiber";
 import { useEffect, useState, useRef } from "react";
 import { Vector3 } from "three";
+import { useCarContext } from "../context/CarControlsContext"
 
 export const useControls = (vehicleApi, chassisApi , onFrame) => {
 
@@ -8,7 +10,12 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
 
 
   const [brakeForce, setBrakeForce] = useState(0);
+  const [turboStartTime, setTurboStartTime] = useState(null);
 
+  const { car, setCarValue } = useCarContext()
+
+  //console.log("vehicleApi", vehicleApi)
+  //console.log("chassisApi", chassisApi)
   useEffect(() => {
     const keyDownPressHandler = (e) => {
       setControls((controls) => ({ ...controls, [e.key.toLowerCase()]: true }));
@@ -27,15 +34,29 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
   }, []);
 
 
-  useEffect(() => {
-    //console.log(vehicleApi);
-    //console.log(chassisApi.velocity.subscribe((v) => (velocity.current = v)));
-    
+  useFrame((state) => {
     if (!vehicleApi || !chassisApi) return;
 
+    if(turboStartTime && ((Date.now() - turboStartTime) / 1000) > 1.5){ //Quitar el turbo despues de 2 segundos
+      setCarValue('turbo', false)
+      setTurboStartTime(null)
+    }
+
+    let speedMulti = 1;
+    if (controls.shift && car.turbo) {
+      if(!turboStartTime){ //Tomar el momento que se uso el turbo
+        setTurboStartTime(Date.now());
+      }
+      state.camera.fov = 100 
+      speedMulti = 2 
+    } else {
+      state.camera.fov = 80 
+      speedMulti =  1
+    }
+    
     if (controls.w) {
-      vehicleApi.applyEngineForce(150, 2);
-      vehicleApi.applyEngineForce(150, 3);
+        vehicleApi.applyEngineForce(150 * speedMulti, 2);
+        vehicleApi.applyEngineForce(150 * speedMulti, 3);
     } else if (controls.s) {
       vehicleApi.applyEngineForce(-150, 2);
       vehicleApi.applyEngineForce(-150, 3);
@@ -117,5 +138,4 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
   }, [controls, vehicleApi, chassisApi]);
 
   return controls;
-
 }

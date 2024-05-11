@@ -15,14 +15,22 @@ export const CarProvider = ({ children }) => {
 
     const [car, setCar] = useState({
         ref: null,
-        body: null,
+        currentPosition: [0, 0, 0],
+        turbo: false,
     });
-    
+
+    const setCarValue = (key, value) => {
+        setCar({
+            ...car,
+            [key]: value
+        })
+    }
+
 
     return (
         <CarContext.Provider
             value={{
-                car, setCar
+                car, setCar, setCarValue
             }}
         >
             {children}

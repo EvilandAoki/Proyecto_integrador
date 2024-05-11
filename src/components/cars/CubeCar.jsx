@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { useBox, useRaycastVehicle } from "@react-three/cannon";
 import { useEffect, useRef } from "react";
 import { useWheels } from "../../hooks/useWheels";
@@ -6,10 +7,12 @@ import { useControls } from "../../hooks/useControls";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { Quaternion, Vector3 } from "three";
 import { GLTFLoader } from "three/examples/jsm/Addons.js";
+import { useCarContext } from "../../context/CarControlsContext";
 
 
 export const CubeCar = ({ thirdPerson }) => {
 
+    const { setCarValue } = useCarContext()
 
     let result = useLoader(
         GLTFLoader,
@@ -83,9 +86,9 @@ export const CubeCar = ({ thirdPerson }) => {
 
         let position = new Vector3(0, 0, 0);
         position.setFromMatrixPosition(chassisBody.current.matrixWorld);
-        
-        //console.log(chassisApi.velocity.length(), "avc");
 
+        setCarValue('currentPosition', position)
+        
         let quaternion = new Quaternion(0, 0, 0, 0);
         quaternion.setFromRotationMatrix(chassisBody.current.matrixWorld);
 

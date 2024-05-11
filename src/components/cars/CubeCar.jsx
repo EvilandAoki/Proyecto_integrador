@@ -1,5 +1,5 @@
 import { useBox, useRaycastVehicle } from "@react-three/cannon";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useWheels } from "../../hooks/useWheels";
 import { WheelDebug } from "./WheelDebug";
 import { useControls } from "../../hooks/useControls";
@@ -23,6 +23,11 @@ export const CubeCar = ({ thirdPerson }) => {
         useRef(null)
     )
 
+    const carroej = useBox(
+        () => ({ args: chassisBodyArgs, mass: 150, position }),
+        useRef(null)
+    )
+    
     const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 
     const [vehicle, vehicleApi] = useRaycastVehicle(
@@ -34,13 +39,17 @@ export const CubeCar = ({ thirdPerson }) => {
         useRef(null)
     )
 
-    useControls(vehicleApi, chassisApi)
+    useControls(vehicleApi, chassisApi);
+
     
     useFrame((state) => {
+
         if (!thirdPerson) return;
 
         let position = new Vector3(0, 0, 0);
         position.setFromMatrixPosition(chassisBody.current.matrixWorld);
+        
+        //console.log(chassisApi.velocity.length(), "avc");
 
         let quaternion = new Quaternion(0, 0, 0, 0);
         quaternion.setFromRotationMatrix(chassisBody.current.matrixWorld);
@@ -54,7 +63,10 @@ export const CubeCar = ({ thirdPerson }) => {
         wDir.add(new Vector3(0, 0.2, 0));
         state.camera.position.copy(cameraPosition);
         state.camera.lookAt(position);
+        
     });
+
+
 
     return (
         <group ref={vehicle} name="vehicle">

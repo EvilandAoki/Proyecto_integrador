@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { Vector3 } from "three";
 
-export const useControls = (vehicleApi, chassisApi) => {
+export const useControls = (vehicleApi, chassisApi , onFrame) => {
 
   let [controls, setControls] = useState({});
+  //const [previousVelocity, setPreviousVelocity] = useState([0, 0, 0]);
+
 
 
   useEffect(() => {
@@ -22,7 +25,11 @@ export const useControls = (vehicleApi, chassisApi) => {
     }
   }, []);
 
+
   useEffect(() => {
+    //console.log(vehicleApi);
+    //console.log(chassisApi.velocity.subscribe((v) => (velocity.current = v)));
+    
     if (!vehicleApi || !chassisApi) return;
 
     if (controls.w) {
@@ -62,8 +69,34 @@ export const useControls = (vehicleApi, chassisApi) => {
       chassisApi.position.set(-1.5, 0.5, 3);
       chassisApi.velocity.set(0, 0, 0);
       chassisApi.angularVelocity.set(0, 0, 0);
+
+
+
+
+
       chassisApi.rotation.set(0, 0, 0);
     }
+
+    // Calcula la aceleración
+    /*const currentVelocity = chassisApi.current?.velocity;
+    console.log(currentVelocity, "velocidad")
+    const previousVelocityVector = new Vector3(...previousVelocity);
+    const currentVelocityVector = new Vector3(...currentVelocity);
+
+    // Calcula la aceleración con las diferencias de velocidad
+    const delta = 1; // Aquí puedes obtener el delta de tiempo entre frames si tienes acceso a él
+    const acceleration = new Vector3()
+        .subVectors(currentVelocityVector, previousVelocityVector)
+        .divideScalar(delta);
+
+    // Llama a `onFrame` para manejar la aceleración.
+    if (onFrame) {
+        onFrame(acceleration.length());
+    }
+
+    // Actualiza la velocidad anterior
+    setPreviousVelocity(currentVelocity);*/
+
   }, [controls, vehicleApi, chassisApi]);
 
   return controls;

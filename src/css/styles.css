@@ -35,3 +35,9 @@ body {
 .bg-login{
   background-color: rgba(248, 249, 250, 0.1);
 }
+
+.velocimetro{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}

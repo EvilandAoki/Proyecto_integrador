@@ -35,17 +35,16 @@ export const CubeCar = ({ thirdPerson }) => {
     const height = 0.07;
     const front = 0.15;
     const wheelRadius = 0.05;
-    const velocity = new Vector3(0, 0, 0)
 
-    const chassisBodyArgs = [width, height, front * 2, velocity];
+    const chassisBodyArgs = [width, height, front * 2];
 
     const [chassisBody, chassisApi] = useBox(
         () => ({
             args: chassisBodyArgs,
-            // velocity: [0, 0, 0],
-            // angularVelocity: new Vector3(0, 0, 0),
+            angularVelocity: [0, 10, 0],
             mass: 150,
-            position
+            position,
+            onCollide: true
         })
     )
 
@@ -59,24 +58,6 @@ export const CubeCar = ({ thirdPerson }) => {
         })
     )
 
-    console.log("vehicle", vehicle)
-    // console.log("chassisApi del vehiculo", chassisApi.velocity.set(0, 0, 0))
-    // console.log("chassisApi del vehiculo", chassisApi.velocity.copy(new Vector3(1, 0, 0)))
-    console.log("chassisApi.velocity", chassisApi.velocity)
-    console.log("chassisBody del vehiculo", chassisBody)
-    console.log("vehicleApi del vehiculo", vehicleApi)
-
-    // TODO setear la velocidad 
-
-    // Función para establecer la velocidad del vehículo
-    const setVehicleVelocity = () => {
-        // Asegúrate de que vehicleApi y chassisApi estén definidos
-        if (vehicleApi && chassisApi.velocity) {
-            console.log(chassisApi?.velocity.xs, "chassisApi?.velocity")
-        }
-    };
-
-    // Ejemplo de uso: Establecer la velocidad del vehículo a [1, 0, 0]
 
     useControls(vehicleApi, chassisApi)
 
@@ -88,7 +69,7 @@ export const CubeCar = ({ thirdPerson }) => {
         position.setFromMatrixPosition(chassisBody.current.matrixWorld);
 
         setCarValue('currentPosition', position)
-        
+
         let quaternion = new Quaternion(0, 0, 0, 0);
         quaternion.setFromRotationMatrix(chassisBody.current.matrixWorld);
 
@@ -101,7 +82,7 @@ export const CubeCar = ({ thirdPerson }) => {
         wDir.add(new Vector3(0, 0.2, 0));
         state.camera.position.copy(cameraPosition);
         state.camera.lookAt(position);
-        
+
     });
 
 

@@ -22,11 +22,6 @@ export const TutorialLevel = () => {
     const [thirdPerson, setThirdPerson] = useState(true);
     const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
     const [aceleracion, setAceleracion] = useState(0);
-
-    const handleFrame = (newAceleracion) => {
-        setAceleracion(newAceleracion);
-    };
-
     const { car } = useCarContext()
 
     return (

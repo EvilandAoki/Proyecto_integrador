@@ -1,18 +1,39 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import "../../layouts/HomeScreen/styles.css";
 import LOGO_UNIVALLE from "/public/logo-univalle.png";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
 
+const LEVELS_KEYS = {
+    1: '/levelOne',
+    2: '/levelTwo',
+    3: '/levelThree'
+}
+
 export const Login = () => {
     const navigate = useNavigate();
 
-    const { loginWithGoogle, logout, userData } = useAuth();
+    const { loginWithGoogle, logout, userData, gameInfo } = useAuth();
 
     const onHandleGoogle = (e) => {
         e.preventDefault();
         loginWithGoogle();
     };
+
+    const currentLevel = useMemo(() => {
+        console.log('gameData', gameInfo)
+        if(!gameInfo){
+            return null
+        }
+        console.log("currentLevel", gameInfo)
+        const isComplete = gameInfo?.levelComplete;
+        let currentLevel = gameInfo?.lastLevel;
+        if(isComplete){
+            currentLevel++;
+        }
+        
+        return LEVELS_KEYS[currentLevel]
+    }, [gameInfo])
 
     return (
         <div className="homeScreenBackground p-2 p-md-4 justify-content-between">
@@ -36,12 +57,12 @@ export const Login = () => {
                     <h1 className="title-game text-center text-monospace">Drift Dynasty</h1>
                     {userData ? (
                         <div className="d-flex flex-column justify-content-center">
-                            <button
+                            {gameInfo?.lastLevel > 0 && <button
                                 className="btn btn-dark mb-4"
-                                onClick={() => navigate("/levelOne")}
+                                onClick={() => navigate(currentLevel)}
                             >
                                 Continuar juego
-                            </button>
+                            </button>}
                             <button
                                 className="btn btn-dark mb-4"
                                 onClick={() => navigate("/tutorial")}

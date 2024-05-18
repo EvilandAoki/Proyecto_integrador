@@ -37,7 +37,7 @@ const Tire = ({ x, z, rot=[0, Math.PI, Math.PI / 2], axisXmov=false }) => {
             <group ref={tireRef} rotation={[Math.PI / 2, 0, 0]}>
                 {/* Llanta exterior */}
                 <mesh>
-                    <torusGeometry args={[0.8, 0.35, 16, 100]} />
+                    <torusGeometry args={[0.7, 0.35, 16, 100]} />
                     <meshStandardMaterial color="#2B2A29" />
                 </mesh>
                 {/* Llanta interior */}

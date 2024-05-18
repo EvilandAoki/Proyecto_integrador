@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../firebase.config"
+import { createGameData, updateGameData } from "../db/gameData-collection";
 
 export const AuthContext = createContext();
 
@@ -23,10 +24,11 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const suscribed = onAuthStateChanged(auth, (currentUser) => {
             saveUserData(currentUser)
+            loadInfo()
         })
 
         return () => suscribed()
-      }, [])
+    }, [])
 
     const saveGameInfo= (data) => {
         //validaciones y otros
@@ -41,9 +43,17 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    const levelComplete = async (levelData) => {
+        const res = await updateGameData( userData.email,{
+            userKey: userData.email,
+            ...levelData
+        })
+        saveGameInfo(res.userData)
+    }
+
     const loadInfo = async () => {
-        const _gameInfo = localStorage.getItem('userData');
-        const _userData = localStorage.getItem('gameInfo');
+        const _gameInfo = localStorage.getItem('gameInfo');
+        const _userData = localStorage.getItem('userData');
 
         saveGameInfo(JSON.parse(_gameInfo));
         setUserData(JSON.parse(_userData));
@@ -53,9 +63,11 @@ export const AuthProvider = ({ children }) => {
         setLoading(true);
         try {
             const provider = new GoogleAuthProvider();
-            const res = await signInWithPopup(auth, provider)
+            const res = await signInWithPopup(auth, provider);
+            const dbData = await createGameData(res.user);
             setLoading(false);
             saveUserData(res.user);
+            saveGameInfo(dbData.userData);
             return { success:  true, user: res.user }
         } catch (error) {
             setLoading(false);
@@ -84,7 +96,8 @@ export const AuthProvider = ({ children }) => {
                 gameInfo,
                 saveGameInfo,
                 loading,
-                loadInfo
+                loadInfo,
+                levelComplete
             }}
         >
             {children}

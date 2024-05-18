@@ -16,6 +16,7 @@ import Tire from "../../components/Tire"
 import TurboItem from "../../components/TurboItem"
 import { useCarContext } from "../../context"
 import { SiTurbo } from "react-icons/si";
+import FinishLine from "../../components/FinisLine"
 
 
 export const TutorialLevel = () => {
@@ -56,9 +57,10 @@ export const TutorialLevel = () => {
                             <TurboItem key={'turbo5'} x={0} z={-90} />
                             <Tire key={'tire1'}  x={-20} z={27} />
                             <Tire key={'tire2'}  x={-20} z={60} />
-                             <Tire key={'tire3'}  x={-88} z={60} rot={[Math.PI / 2,Math.PI / 2, 0]} axisXmov/>
-                             <Tire key={'tire4'}  x={-92} z={-60} rot={[Math.PI / 2,Math.PI / 2, 0]} axisXmov/>
-                             <Tire key={'tire5'}  x={60} z={-55}/>
+                            <Tire key={'tire3'}  x={-88} z={60} rot={[Math.PI / 2,Math.PI / 2, 0]} axisXmov/>
+                            <Tire key={'tire4'}  x={-92} z={-60} rot={[Math.PI / 2,Math.PI / 2, 0]} axisXmov/>
+                            <Tire key={'tire5'}  x={60} z={-55}/>
+                            <FinishLine currentLevel={0} x={40} z={11.1}/>
                         </Suspense>
                     </Debug>
                 </Physics>

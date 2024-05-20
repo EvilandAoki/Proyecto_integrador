@@ -13,10 +13,10 @@ export const GameRoutes = () => {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/levelOne" element={<LevelOne />} />
-                <Route path="/levelTwo" element={<LevelTwo />} />
-                <Route path="/levelThree" element={<LevelThree />} />
+                {/* <Route path="/levelTwo" element={<LevelTwo />} /> */}
+                {/* <Route path="/levelThree" element={<LevelThree />} /> */}
                 <Route path="/tutorial" element={<TutorialLevel />} />
-                <Route path="/pruebas" element={<PruebasSite />} />
+                {/* <Route path="/pruebas" element={<PruebasSite />} /> */}
             </Routes>
         </BrowserRouter>
     )

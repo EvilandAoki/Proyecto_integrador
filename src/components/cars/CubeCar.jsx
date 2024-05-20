@@ -41,12 +41,13 @@ export const CubeCar = ({ thirdPerson }) => {
     const [chassisBody, chassisApi] = useBox(
         () => ({
             args: chassisBodyArgs,
-            angularVelocity: [0, 10, 0],
             mass: 150,
             position,
             onCollide: true
         })
     )
+
+    console.log(chassisApi, "chassisApi")
 
     const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 
@@ -94,7 +95,7 @@ export const CubeCar = ({ thirdPerson }) => {
                 <boxGeometry args={chassisBodyArgs} />
             </mesh> */}
             <group ref={chassisBody} name="chassisBody">
-                <primitive object={result} rotation-y={Math.PI} position={[0, -0.09, 0]} />
+                <primitive object={result} rotation-y={Math.PI} position={[0, -0.01, 0]} />
             </group>
             <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
             <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />

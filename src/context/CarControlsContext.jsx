@@ -19,6 +19,9 @@ export const CarProvider = ({ children }) => {
     
     const [chassisBodyCar, setChassisBodyCar] = useState(null);
 
+    const [startToEnd, setStartToEnd] = useState(false);
+
+
     const [car, setCar] = useState({
         ref: null,
         currentPosition: [0, 0, 0],
@@ -72,6 +75,8 @@ export const CarProvider = ({ children }) => {
                 wheels: [useRef().current, createRef(), createRef(), createRef()],
                 chassisBodyCar,
                 setChassisBodyCar,
+                startToEnd,
+                setStartToEnd,
                 api: null,
             }}
         >

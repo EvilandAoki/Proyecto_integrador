@@ -41,6 +41,23 @@ body {
   bottom: 20px;
   right: 20px;
 }
+
+.Stopwatch{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+.Stopwatch img{
+  position: relative;
+  max-width: 200px;
+}
+.Stopwatch h1{
+  position: absolute;
+  top: 50%;
+  font-size: 25px;
+  left: 50%;
+  transform: translate(-50%, -30%);
+}
 .lifes{
   position: absolute;
   bottom: 20px;

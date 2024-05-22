@@ -1,6 +1,7 @@
 import { useBox, usePlane } from '@react-three/cannon';
 import { useGLTF } from '@react-three/drei'
 import { ColliderBox } from '../../../components/colliders/ColliderBox';
+import { Wall } from '../../../components/wall/Wall';
 
 const Plane = ({ position, rotation, args, color }) => {
     const [ref] = usePlane(() => ({
@@ -23,6 +24,7 @@ export const WorldOne = (props) => {
         <>
             {/* Pista horizontal */}
             <Plane position={[0, -0.81, -30]} rotation={[-Math.PI / 2, 0, 0]} args={[100, 100]} color="grey" />
+            <Wall/>
             {
                 //Base
             }

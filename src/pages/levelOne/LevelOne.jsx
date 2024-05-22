@@ -11,6 +11,7 @@ import { Wheel } from '../../components/cars/porsche/Wheel'
 import { Chassis } from '../../components/cars/porsche/Chassis'
 import { Vehicle } from '../../components/cars/porsche/Vehicle'
 import { CubeCar } from '../../components/cars/CubeCar'
+import Stopwatch from "./../../components/controls/Stopwatch"
 
 const URLENVIRONMENT = 'public/assets/textures/envmap.hdr'
 const URLENVIRONMENT2 = 'public/assets/textures/dikhololo_night_1k.hdr'
@@ -20,31 +21,35 @@ export const LevelOne = () => {
     const [cameraPosition, setCameraPosition] = useState([-20, 3.9, 6.21]);
 
     return (
-        <Canvas
-            shadows={true}
-        >
-            <Environment files={URLENVIRONMENT} background={"both"} />
-            <color attach="background" args={["#ececec"]} />
-            <LightsOne />
-            <PerspectiveCamera makeDefault position={cameraPosition} fov={80} />
-            {!thirdPerson && (
-                <OrbitControls target={[10.64, -10.71, 0.03]} />
-            )}
-            <Physics
-                broadphase="SAP"
-                gravity={[0, -2.6, 0]}
-                // frictionGravity={[0, 1, 0]}
-                // defaultContactMaterial={{ restitution: 0.3 }}
+
+        <>
+            <Canvas
+                shadows={true}
             >
-                <Debug color="green">
-                    <Suspense>
-                        <WorldOne />
-                        <CubeCar thirdPerson={thirdPerson} />
-                    </Suspense>
-                </Debug>
-            </Physics>
-            <Perf />
-        </Canvas>
+                <Environment files={URLENVIRONMENT} background={"both"} />
+                <color attach="background" args={["#ececec"]} />
+                <LightsOne />
+                <PerspectiveCamera makeDefault position={cameraPosition} fov={80} />
+                {!thirdPerson && (
+                    <OrbitControls target={[10.64, -10.71, 0.03]} />
+                )}
+                <Physics
+                    broadphase="SAP"
+                    gravity={[0, -2.6, 0]}
+                    // frictionGravity={[0, 1, 0]}
+                    // defaultContactMaterial={{ restitution: 0.3 }}
+                >
+                    <Debug color="green">
+                        <Suspense>
+                            <WorldOne />
+                            <CubeCar thirdPerson={thirdPerson} />
+                        </Suspense>
+                    </Debug>
+                </Physics>
+                <Perf />
+            </Canvas>
+            <Stopwatch />
+        </>
 
     )
 }

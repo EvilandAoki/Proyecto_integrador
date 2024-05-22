@@ -17,7 +17,7 @@ const URLENVIRONMENT2 = 'public/assets/textures/dikhololo_night_1k.hdr'
 
 export const LevelOne = () => {
     const [thirdPerson, setThirdPerson] = useState(false);
-    const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
+    const [cameraPosition, setCameraPosition] = useState([-20, 3.9, 6.21]);
 
     return (
         <Canvas
@@ -28,7 +28,7 @@ export const LevelOne = () => {
             <LightsOne />
             <PerspectiveCamera makeDefault position={cameraPosition} fov={80} />
             {!thirdPerson && (
-                <OrbitControls target={[-2.64, -0.71, 0.03]} />
+                <OrbitControls target={[10.64, -10.71, 0.03]} />
             )}
             <Physics
                 broadphase="SAP"

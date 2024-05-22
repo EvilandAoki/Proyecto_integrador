@@ -1,25 +1,26 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import Cronometro from "/public/cronometro.png";
+import { useCarContext } from '../../context/CarControlsContext';
 
 const Stopwatch = forwardRef((props, ref) => {
-  const [isActive, setIsActive] = useState(false);
+  const { startToEnd } = useCarContext();
+
+
   const [time, setTime] = useState(0);
 
   useEffect(() => {
     let interval = null;
-    if (isActive) {
+    if (startToEnd) {
       interval = setInterval(() => {
         setTime(prevTime => prevTime + 1);
       }, 1000);
-    } else if (!isActive && time !== 0) {
+    } else if (!startToEnd && time !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, time]);
+  }, [startToEnd, time]);
 
-  const startStopwatch = () => {
-    setIsActive(true);
-  };
+  
 
   const stopStopwatch = () => {
     setIsActive(false);
@@ -44,7 +45,6 @@ const Stopwatch = forwardRef((props, ref) => {
         <img src={Cronometro} alt="Cronometro" />
         <h1>{new Date(time * 1000).toISOString().substr(11, 8)}</h1>
         <div className="funcionalidades d-none">
-            <button onClick={startStopwatch}>Start</button>
             <button onClick={stopStopwatch}>Stop</button>
             <button onClick={resetStopwatch}>Reset</button>
             <button onClick={getCurrentTime}>Get Current Time</button>

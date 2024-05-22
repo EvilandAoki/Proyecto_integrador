@@ -5,6 +5,7 @@ import { useCarContext } from "../../context"
 import { useBox, useRaycastVehicle } from "@react-three/cannon"
 import { useWheels } from "../../hooks/useWheels"
 import { useLoader } from "@react-three/fiber"
+import { GLTFLoader } from "three/examples/jsm/Addons.js"
 
 
 const Supra = ({ thirdPerson }) => {

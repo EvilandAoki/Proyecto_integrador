@@ -47,7 +47,7 @@ export const CubeCar = ({ thirdPerson }) => {
         })
     )
 
-    console.log(chassisApi, "chassisApi")
+    // console.log(chassisApi, "chassisApi")
 
     const [wheels, wheelInfos] = useWheels(width, height, front, wheelRadius);
 

@@ -38,8 +38,8 @@ function TurboItem({x,z}) {
   return (
     <>
         {show? <mesh ref={meshRef} position={[x, -0.49, z]}>
-        <boxGeometry attach="geometry" args={[sf, sf, sf]} />
-        <meshBasicMaterial attach="material" color="blue" transparent opacity={0.5} />
+          <boxGeometry attach="geometry" args={[sf, sf, sf]} wa/>
+          <meshBasicMaterial attach="material" color="red" transparent opacity={0.5} />
         </mesh> : <></>}
     </>
   );

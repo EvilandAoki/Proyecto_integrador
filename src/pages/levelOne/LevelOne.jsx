@@ -17,7 +17,7 @@ const URLENVIRONMENT = 'public/assets/textures/envmap.hdr'
 const URLENVIRONMENT2 = 'public/assets/textures/dikhololo_night_1k.hdr'
 
 export const LevelOne = () => {
-    const [thirdPerson, setThirdPerson] = useState(true);
+    const [thirdPerson, setThirdPerson] = useState(false);
     const [cameraPosition, setCameraPosition] = useState([-20, 3.9, 6.21]);
 
     return (

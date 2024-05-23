@@ -13,11 +13,12 @@ const Tire = ({ x, z, rot=[0, Math.PI, Math.PI / 2], axisXmov=false }) => {
     const [cylinderBody, cylinderApi] = useCylinder(() => ({
         mass: 1, // Masa del objeto
         position: [x, 0.2, z], // Posición inicial del objeto
-        args: [1, 1, 0.5], // Radio superior, radio inferior, altura del cilindro
+        args: [1, 1, 0.5, 20], // Radio superior, radio inferior, altura del cilindro
         rotation: rot, // Rotación inicial del cilindro
         linearDamping: 0.1, // Amortiguación lineal para simular rebote
         type: 'Kinematic',
-        allowSleep: true
+        allowSleep: true,
+        onCollide: handleCollide
     }));
 
     useFrame(({ clock }) => {
@@ -31,6 +32,10 @@ const Tire = ({ x, z, rot=[0, Math.PI, Math.PI / 2], axisXmov=false }) => {
             cylinderApi.velocity.set(0, 0,offset);// Aplicar la posición al cilindro
         }
     })
+
+    const handleCollide = (e) => {
+        console.log("-1 hp")
+    };
 
     return (
         <group ref={cylinderBody} >

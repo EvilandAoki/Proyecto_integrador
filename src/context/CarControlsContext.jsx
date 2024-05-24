@@ -21,7 +21,7 @@ export const CarProvider = ({ children }) => {
 
     const [startToEnd, setStartToEnd] = useState(false);
 
-    const [timeLevel, setTimeLevel] = useState(9);
+    const [timeLevel, setTimeLevel] = useState(0);
 
     // useEffect(() => {
     //     console.log(timeLevel, 'cambio este timeLevel?')

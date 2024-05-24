@@ -68,3 +68,81 @@ body {
   max-width: 30px;
   margin-right: 5px;
 }
+
+.container-modal{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    z-index: 1;
+    user-select: none;
+    top: 0;
+    background-image: url(/public/modalBgCar.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-modal{
+  background-color: rgba(00, 000, 000, 0.6);
+}
+
+.contenido-modal{
+  max-height: 40%;
+}
+
+
+.title-modal{
+  font-size: 28px;
+  font-weight: bold;
+  color: red;
+  font-family: 'FontSquidGames', Arial, sans-serif;
+  text-align: center;
+}
+.title-modal h2{
+  font-family: "Faster One", system-ui;
+    background: linear-gradient(to right, rgb(255, 0, 0), rgb(251, 255, 0));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 400;
+    font-size: 50px;
+    font-style: normal;
+}
+.title-modal h3{
+  font-family: monospace;
+  color: black;
+  font-weight: bold;
+  font-size: 50px;
+  background: white;
+  border-radius: 30px;
+  padding: 20px;
+  background-color: rgba(248, 249, 250, 0.6);
+}
+
+.buttons-modal{
+  display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.buttons-modal > button {
+  color: white;
+  background-color: #6c757d;;
+  font-weight: normal;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.buttons-modal > button:hover {
+  opacity: 0.9;
+}
+

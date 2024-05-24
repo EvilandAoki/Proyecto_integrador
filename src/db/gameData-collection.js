@@ -60,8 +60,8 @@ const updateGameData = async (userEmail, newData) => {
             ...userData[0],
             ...newData
         });
-        const _newData = await readGameData(userEmail).userData;
-        return { success: true, userData: _newData,message: "gameData updated successfully" };
+        const _newData = await readGameData(userEmail);
+        return { success: true, userData: _newData.userData,message: "gameData updated successfully" };
     } catch (error) {
         console.log('ocurrio un error', error)
         return error;

@@ -16,12 +16,13 @@ import Tire from '../../components/Tire'
 import TurboItem from '../../components/TurboItem'
 import { useCarContext } from '../../context'
 import { SiTurbo } from "react-icons/si";
+import WelcomeText from "./../../components/views/ModalViews";
 
 const URLENVIRONMENT = 'public/assets/textures/envmap.hdr'
 const URLENVIRONMENT2 = 'public/assets/textures/dikhololo_night_1k.hdr'
 
 export const LevelOne = () => {
-    const [thirdPerson, setThirdPerson] = useState(false);
+    const [thirdPerson, setThirdPerson] = useState(true);
     const [cameraPosition, setCameraPosition] = useState([-20, 3.9, 6.21]);
 
     const { car } = useCarContext()
@@ -68,12 +69,14 @@ export const LevelOne = () => {
                 <Perf />
             </Canvas>
             <Stopwatch />
+            <WelcomeText Level={2} />
             <div style={{position: "absolute", top: 1, rigth: 2}} className="boder pt-4 ps-4">
                 {car.turbo && 
                     <div className="border border-info rounded shadow-lg p-2"> 
                         <SiTurbo size={50} className="text-info" />
                     </div>}
             </div>
+
         </>
 
     )

@@ -5,7 +5,7 @@ import { useAuth } from '../../context';
 
 export const WallToEnd = () => {
 
-    const { setStartToEnd, startToEnd, timeLevel } = useCarContext();
+    const { setStartToEnd, startToEnd, timeLevel, setModalActive } = useCarContext();
     const { levelComplete } = useAuth();
 
     // const position = [4.3, -0.6, -28]
@@ -21,6 +21,7 @@ export const WallToEnd = () => {
 
     const handleCollide = useCallback((e) => {
         setStartToEnd(false)
+        setModalActive(true)
     }, [timeLevel]);
 
     const [wallBody, api] = useBox(() => ({

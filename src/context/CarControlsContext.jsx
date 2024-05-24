@@ -21,7 +21,9 @@ export const CarProvider = ({ children }) => {
 
     const [startToEnd, setStartToEnd] = useState(false);
 
-    const [timeLevel, setTimeLevel] = useState(9);
+    const [timeLevel, setTimeLevel] = useState(0);
+
+    const [modalActive, setModalActive] = useState(false);
 
     // useEffect(() => {
     //     console.log(timeLevel, 'cambio este timeLevel?')
@@ -85,7 +87,9 @@ export const CarProvider = ({ children }) => {
                 setStartToEnd,
                 api: null,
                 timeLevel,
-                setTimeLevel
+                setTimeLevel,
+                modalActive,
+                setModalActive
             }}
         >
             {children}

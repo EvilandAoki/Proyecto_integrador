@@ -2,6 +2,7 @@ import { useBox, usePlane } from '@react-three/cannon';
 import { useGLTF } from '@react-three/drei'
 import { ColliderBox } from '../../../components/colliders/ColliderBox';
 import { Wall } from '../../../components/wall/Wall';
+import { WallToEnd } from '../../../components/wall/WallToEnd';
 
 const Plane = ({ position, rotation, args, color }) => {
     const [ref] = usePlane(() => ({
@@ -24,7 +25,8 @@ export const WorldOne = (props) => {
         <>
             {/* Pista horizontal */}
             <Plane position={[0, -0.81, -30]} rotation={[-Math.PI / 2, 0, 0]} args={[100, 100]} color="grey" />
-            <Wall/>
+            <Wall />
+            <WallToEnd />
             {
                 //Base
             }
@@ -38,7 +40,7 @@ export const WorldOne = (props) => {
             <ColliderBox position={[-13.2, -0.3, 0.6]} scale={[20, 1, 0.3]} color="blue" />
             <ColliderBox position={[14.6, -0.3, 0.6]} scale={[30, 1, 0.3]} color="blue" />
             <ColliderBox position={[-3.2, -0.3, -2.8]} scale={[10, 1, 0.3]} color="blue" />
-            <ColliderBox position={[9, -0.3, -8.9]} scale={[35, 1, 0.3]} color="blue" />        
+            <ColliderBox position={[9, -0.3, -8.9]} scale={[35, 1, 0.3]} color="blue" />
             {
                 //Abajo Derecha
             }
@@ -51,7 +53,7 @@ export const WorldOne = (props) => {
             <ColliderBox position={[-1.5, -0.3, -7.3]} scale={[0.3, 1, 2.9]} color="blue" />
             <ColliderBox position={[-5.15, -0.3, -6]} scale={[7, 1, 0.3]} color="blue" />
             <ColliderBox position={[-11, -0.3, -5.56]} scale={[0.3, 1, 12]} color="blue" />
-            <ColliderBox position={[9, -0.3, -11.7]} scale={[35, 1, 0.3]} color="blue" />            
+            <ColliderBox position={[9, -0.3, -11.7]} scale={[35, 1, 0.3]} color="blue" />
             {
                 //Abajo Izquierda
             }
@@ -62,7 +64,7 @@ export const WorldOne = (props) => {
             <ColliderBox position={[-14.1, -0.3, -2.4]} scale={[3.5, 1, 0.3]} color="blue" />
             <ColliderBox position={[-16, -0.3, -6.75]} scale={[0.3, 1, 9]} color="blue" />
             <ColliderBox position={[-18, -0.3, -6.75]} scale={[0.3, 1, 9]} color="blue" />
-            <ColliderBox position={[-20.5   , -0.3, -4]} scale={[0.3, 1, 9]} color="blue" />
+            <ColliderBox position={[-20.5, -0.3, -4]} scale={[0.3, 1, 9]} color="blue" />
             <ColliderBox position={[-18.15, -0.3, -18.2]} scale={[10, 1, 0.3]} color="blue" />
             <ColliderBox position={[-16.15, -0.3, -21.5]} scale={[10, 1, 0.3]} color="blue" />
             <ColliderBox position={[-18.15, -0.3, -25.1]} scale={[10, 1, 0.3]} color="blue" />
@@ -78,7 +80,7 @@ export const WorldOne = (props) => {
             <ColliderBox position={[-2.7, -0.3, -14.85]} scale={[7, 1, 0.3]} color="blue" />
             <ColliderBox position={[-6.1, -0.3, -19.5]} scale={[0.3, 1, 9]} color="blue" />
             <ColliderBox position={[-3.7, -0.3, -23.86]} scale={[4.5, 1, 0.3]} color="blue" />
-            <ColliderBox position={[-1.6, -0.3, -20.45]} scale={[0.3, 1, 6.5]} color="blue" />            
+            <ColliderBox position={[-1.6, -0.3, -20.45]} scale={[0.3, 1, 6.5]} color="blue" />
             {
                 //Arriba Derecha
             }
@@ -95,7 +97,7 @@ export const WorldOne = (props) => {
             <ColliderBox position={[17.15, -0.3, -16.5]} scale={[0.3, 1, 3]} color="blue" />
             <ColliderBox position={[5.8, -0.3, -26.35]} scale={[0.3, 1, 3]} color="blue" />
             <ColliderBox position={[13.3, -0.3, -25]} scale={[8, 1, 0.3]} color="blue" />
-            <ColliderBox position={[17.15, -0.3, -23]} scale={[0.3, 1, 4]} color="blue" />         
+            <ColliderBox position={[17.15, -0.3, -23]} scale={[0.3, 1, 4]} color="blue" />
         </>
     )
 }

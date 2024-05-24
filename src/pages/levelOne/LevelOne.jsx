@@ -46,7 +46,7 @@ export const LevelOne = () => {
                     // frictionGravity={[0, 1, 0]}
                     // defaultContactMaterial={{ restitution: 0.3 }}
                 >
-                    <Debug color="green">
+                    {/* <Debug color="green"> */}
                         <Suspense>
                             <WorldOne />
                             <CubeCar thirdPerson={thirdPerson} />
@@ -64,9 +64,9 @@ export const LevelOne = () => {
                             <TurboItem key={'turbo7'} x={-2} z={-13} />
                             <TurboItem key={'turbo8'} x={-17} z={-13} />
                         </Suspense>
-                    </Debug>
+                    {/* </Debug> */}
                 </Physics>
-                <Perf />
+                {/* <Perf /> */}
             </Canvas>
             <Stopwatch />
             <WelcomeText Level={2} />

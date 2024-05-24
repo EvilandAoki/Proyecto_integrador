@@ -8,8 +8,8 @@ export const WallToEnd = () => {
     const { setStartToEnd, startToEnd, timeLevel, setModalActive } = useCarContext();
     const { levelComplete } = useAuth();
 
-    // const position = [4.3, -0.6, -28]
-    const position = [3.3, -0.1, -6]
+    const position = [4.3, -0.6, -28]
+    // const position = [3.3, -0.1, -6]
     const scale = [2.5, 3, 0.2]
     const color = "red"
 

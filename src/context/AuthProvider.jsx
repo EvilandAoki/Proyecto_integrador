@@ -44,10 +44,14 @@ export const AuthProvider = ({ children }) => {
     }
 
     const levelComplete = async (levelData) => {
+        console.log(userData, "que hay en el userData?")
         const res = await updateGameData( userData.email,{
             ...levelData
         })
         saveGameInfo(res.userData)
+
+        console.log(levelData, "levelData")
+        console.log(res.userData, "userData LocalStorage")
     }
 
     const loadInfo = async () => {

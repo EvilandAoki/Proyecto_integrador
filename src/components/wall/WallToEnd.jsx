@@ -1,11 +1,11 @@
 import { useBox } from '@react-three/cannon';
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useCarContext } from '../../context/CarControlsContext';
 import { useAuth } from '../../context';
 
 export const WallToEnd = () => {
 
-    const { setStartToEnd, timeLevel } = useCarContext();
+    const { setStartToEnd, startToEnd, timeLevel } = useCarContext();
     const { levelComplete } = useAuth();
 
     // const position = [4.3, -0.6, -28]
@@ -13,10 +13,15 @@ export const WallToEnd = () => {
     const scale = [2.5, 3, 0.2]
     const color = "red"
 
-    const handleCollide = (e) => {
+    useEffect(() => {
+        if (startToEnd == false) {
+            levelComplete({ TimeLevelOne: timeLevel });
+        }
+    }, [startToEnd])
+
+    const handleCollide = useCallback((e) => {
         setStartToEnd(false)
-        levelComplete({ TimeLevelOne: timeLevel });
-    };
+    }, [timeLevel]);
 
     const [wallBody, api] = useBox(() => ({
         args: scale,

@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, createRef, useRef } from "react";
+import { useState, createContext, useContext, createRef, useRef, useEffect } from "react";
 import { Group } from "three";
 
 export const CarContext = createContext();
@@ -21,7 +21,12 @@ export const CarProvider = ({ children }) => {
 
     const [startToEnd, setStartToEnd] = useState(false);
 
-    const [timeLevel, setTimeLevel] = useState(0);
+    const [timeLevel, setTimeLevel] = useState(9);
+
+    // useEffect(() => {
+    //     console.log(timeLevel, 'cambio este timeLevel?')
+    // }, [timeLevel])
+    
 
     const [car, setCar] = useState({
         ref: null,

@@ -18,7 +18,7 @@ const Stopwatch = forwardRef((props, ref) => {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [startToEnd, timeLevel]);
+  }, [startToEnd]);
 
   
 
@@ -26,10 +26,10 @@ const Stopwatch = forwardRef((props, ref) => {
     setIsActive(false);
   };
 
-  const resetStopwatch = () => {
-    setIsActive(false);
-    setTimeLevel(0);
-  };
+  // const resetStopwatch = () => {
+  //   setIsActive(false);
+  //   setTimeLevel(0);
+  // };
 
   const getCurrentTime = () => {
     alert(`Current time: ${new Date(timeLevel * 1000).toISOString().substr(11, 8)}`);
@@ -45,9 +45,9 @@ const Stopwatch = forwardRef((props, ref) => {
         <img src={Cronometro} alt="Cronometro" />
         <h1>{new Date(timeLevel * 1000).toISOString().substr(11, 8)}</h1>
         <div className="funcionalidades d-none">
-            <button onClick={stopStopwatch}>Stop</button>
+            {/* <button onClick={stopStopwatch}>Stop</button>
             <button onClick={resetStopwatch}>Reset</button>
-            <button onClick={getCurrentTime}>Get Current Time</button>
+            <button onClick={getCurrentTime}>Get Current Time</button> */}
         </div>
     </div>
   );

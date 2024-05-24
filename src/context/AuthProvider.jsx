@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }) => {
 
     const levelComplete = async (levelData) => {
         const res = await updateGameData( userData.email,{
-            userKey: userData.email,
             ...levelData
         })
         saveGameInfo(res.userData)

@@ -18,6 +18,9 @@ const createGameData = async (data) => {
                 levelComplete: false,
                 points: 0,
                 time: 0,
+                TimeLevelOne: 0,
+                TimeLevelTwo: 0,
+                TimeLevelThree:0,
             });
             return await readGameData(data.email);
         }
@@ -51,8 +54,10 @@ const updateGameData = async (userEmail, newData) => {
             return { success: false, message: "User not found" };
         }
         const userDoc = userSnapshot.docs[0];
+        const userData = userSnapshot.docs.map((doc) => doc.data());
 
         await updateDoc(userDoc.ref, {
+            ...userData[0],
             ...newData
         });
         const _newData = await readGameData(userEmail).userData;

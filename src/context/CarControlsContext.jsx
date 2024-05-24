@@ -16,11 +16,12 @@ export const useCarContext = () => {
 
 
 export const CarProvider = ({ children }) => {
-    
+
     const [chassisBodyCar, setChassisBodyCar] = useState(null);
 
     const [startToEnd, setStartToEnd] = useState(false);
 
+    const [timeLevel, setTimeLevel] = useState(0);
 
     const [car, setCar] = useState({
         ref: null,
@@ -61,7 +62,7 @@ export const CarProvider = ({ children }) => {
 
     const angularVelocity = [0, 0.5, 0];
 
-   
+
 
     return (
         <CarContext.Provider
@@ -78,6 +79,8 @@ export const CarProvider = ({ children }) => {
                 startToEnd,
                 setStartToEnd,
                 api: null,
+                timeLevel,
+                setTimeLevel
             }}
         >
             {children}

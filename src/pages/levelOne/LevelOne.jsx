@@ -18,8 +18,8 @@ import { useCarContext } from '../../context'
 import { SiTurbo } from "react-icons/si";
 import WelcomeText from "./../../components/views/ModalViews";
 
-const URLENVIRONMENT = 'public/assets/textures/envmap.hdr'
-const URLENVIRONMENT2 = 'public/assets/textures/dikhololo_night_1k.hdr'
+const URLENVIRONMENT = '/assets/textures/envmap.hdr'
+const URLENVIRONMENT2 = '/assets/textures/dikhololo_night_1k.hdr'
 
 export const LevelOne = () => {
     const [thirdPerson, setThirdPerson] = useState(true);

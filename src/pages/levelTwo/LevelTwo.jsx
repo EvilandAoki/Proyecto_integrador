@@ -43,7 +43,7 @@ export const LevelTwo = () => {
                     <WorldTwo />
                     <Ramp/>
                 </Physics>
-                <TextFloat position={[0, 1, -2]} />
+                <TextFloat position={[0, 1, -2]} text={"texto de prueba"} />
             </Canvas>
         </>
     )

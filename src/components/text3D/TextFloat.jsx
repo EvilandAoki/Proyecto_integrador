@@ -3,7 +3,7 @@ import React from 'react'
 
 export const TextFloat = (props) => {
 
-    const text = "Squid Games";
+    // const text = "Squid Games";
 
     return (
         <Float
@@ -26,7 +26,7 @@ export const TextFloat = (props) => {
                     size={0.2}
                 >
                     <meshNormalMaterial />
-                    {text}
+                    {props.text}
                 </Text3D>
             </Center>
         </Float>

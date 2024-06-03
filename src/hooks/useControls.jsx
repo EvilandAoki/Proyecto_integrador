@@ -81,12 +81,10 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
       }
     }
 
-    // if (controls.arrowdown) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, +1]);
-    // if (controls.arrowup) chassisApi.applyLocalImpulse([0, -5, 0], [0, 0, -1]);
-    // if (controls.arrowleft) chassisApi.applyLocalImpulse([0, -5, 0], [-0.5, 0, 0]);
-    // if (controls.arrowright) chassisApi.applyLocalImpulse([0, -5, 0], [+0.5, 0, 0]);
-
-    // TODO Poner aqui los controles del frenado
+    if (controls.arrowdown) chassisApi.applyLocalImpulse([0, -3, 0], [0, 0, +1]);
+    if (controls.arrowup) chassisApi.applyLocalImpulse([0, -3, 0], [0, 0, -1]);
+    if (controls.arrowleft) chassisApi.applyLocalImpulse([0, -3, 0], [-0.5, 0, 0]);
+    if (controls.arrowright) chassisApi.applyLocalImpulse([0, -3, 0], [+0.5, 0, 0]);
 
     if (controls[" "]) {
 
@@ -98,9 +96,6 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
       vehicleApi.setBrake(0, 2);
       vehicleApi.setBrake(0, 3);
     }
-
-   
-    // TODO Finalizar aqui los controles del frenado
 
     //TODO Configurar la position de acuerdo a la position inicial del vehiculo
     if (controls.r) {

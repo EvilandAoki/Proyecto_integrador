@@ -8,6 +8,8 @@ import { LightsTutorial } from "./lights/lightsTutorial"
 import { Debug, Physics } from '@react-three/cannon'
 import { CubeCar } from '../../components/cars/CubeCar'
 import { useCarContext } from '../../context'
+import { Ramp } from "../../components/ramp/Ramp"
+import { TextFloat } from "../../components/text3D/TextFloat"
 
 const URLENVIRONMENT2 = '/assets/textures/dikhololo_night_1k.hdr'
 
@@ -30,6 +32,7 @@ export const LevelTwo = () => {
                 <Physics
                     broadphase="SAP"
                     gravity={[0, -2.6, 0]}
+                    color={'red'}
                 >
                     <CubeCar thirdPerson={thirdPerson} />
                     <PerspectiveCamera makeDefault position={[0, 10, 20]} />
@@ -38,8 +41,9 @@ export const LevelTwo = () => {
                     <LightsTutorial />
                     <Perf />
                     <WorldTwo />
+                    <Ramp/>
                 </Physics>
-
+                <TextFloat position={[0, 1, -2]} />
             </Canvas>
         </>
     )

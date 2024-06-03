@@ -41,9 +41,9 @@ export const LevelTwo = () => {
                     <LightsTutorial />
                     <Perf />
                     <WorldTwo />
-                    <Ramp/>
+                    <Ramp position={[-7.5, -1.5, 2.5]} rotation={[0, -4.7, Math.PI / 8]} args={[4, 2, 2]} />
                 </Physics>
-                <TextFloat position={[0, 1, -2]} text={"texto de prueba"} />
+                <TextFloat position={[-1.2, -1, -2]} text={"texto de prueba"} />
             </Canvas>
         </>
     )

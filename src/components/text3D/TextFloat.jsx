@@ -11,7 +11,6 @@ export const TextFloat = (props) => {
             rotationIntensity={0.01}
             floatIntensity={0.5}
             floatingRange={[1, 2]}
-
         >
             <Center
                 position={props.position}
@@ -21,11 +20,11 @@ export const TextFloat = (props) => {
                     bevelEnabled
                     bevelSize={0.005}
                     bevelThickness={0.01}
-                    height={0.1}
+                    height={0.01}
                     letterSpacing={0.05}
-                    size={0.2}
+                    size={0.15}
                 >
-                    <meshNormalMaterial />
+                    <meshBasicMaterial color={"white"}  />
                     {props.text}
                 </Text3D>
             </Center>

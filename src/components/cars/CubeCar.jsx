@@ -8,11 +8,12 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import { Quaternion, Vector3 } from "three";
 import { GLTFLoader } from "three/examples/jsm/Addons.js";
 import { useCarContext } from "../../context/CarControlsContext";
+import Bullet from "../Bullet";
 
 
 export const CubeCar = ({ thirdPerson }) => {
 
-    const { setCarValue } = useCarContext()
+    const { setCarValue, bullets } = useCarContext()
 
     let result = useLoader(
         GLTFLoader,
@@ -87,20 +88,30 @@ export const CubeCar = ({ thirdPerson }) => {
     });
 
 
-
     return (
-        <group ref={vehicle} name="vehicle">
-            {/* <mesh ref={chassisBody}>
-                <meshBasicMaterial transparent={true} opacity={0.4} />
-                <boxGeometry args={chassisBodyArgs} />
-            </mesh> */}
-            <group ref={chassisBody} name="chassisBody">
-                <primitive object={result} rotation-y={Math.PI} position={[0, -0.01, 0]} />
+        <>
+            <group ref={vehicle} name="vehicle">
+                {/* <mesh ref={chassisBody}>
+                    <meshBasicMaterial transparent={true} opacity={0.4} />
+                    <boxGeometry args={chassisBodyArgs} />
+                </mesh> */}
+                <group ref={chassisBody} name="chassisBody">
+                    <primitive object={result} rotation-y={Math.PI} position={[0, -0.01, 0]} />
+                </group>
+                <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
+                <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
+                <WheelDebug wheelRef={wheels[2]} radius={wheelRadius} />
+                <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} />
             </group>
-            <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />
-            <WheelDebug wheelRef={wheels[1]} radius={wheelRadius} />
-            <WheelDebug wheelRef={wheels[2]} radius={wheelRadius} />
-            <WheelDebug wheelRef={wheels[3]} radius={wheelRadius} />
-        </group>
+            {bullets.map((bullet) => {
+                return (
+                <Bullet
+                    key={bullet.id}
+                    velocity={bullet.forward}
+                    position={bullet.position}
+                />
+                );
+            })}
+        </>
     )
 }

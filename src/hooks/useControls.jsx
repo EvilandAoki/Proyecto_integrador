@@ -1,18 +1,24 @@
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useState, useRef } from "react";
 import { Vector3 } from "three";
 import { useCarContext } from "../context/CarControlsContext"
 
+const bulletCoolDown = 300;
+const bulletSpeed = 30;
 export const useControls = (vehicleApi, chassisApi , onFrame) => {
 
+  const { camera } = useThree();
   let [controls, setControls] = useState({});
   //const [previousVelocity, setPreviousVelocity] = useState([0, 0, 0]);
-
 
   const [brakeForce, setBrakeForce] = useState(0);
   const [turboStartTime, setTurboStartTime] = useState(null);
 
-  const { car, setCarValue } = useCarContext()
+  const { car, setCarValue, setBullets } = useCarContext()
+
+  const state = useRef({
+    timeToShoot: 0,
+  })
 
   //console.log("vehicleApi", vehicleApi)
   //console.log("chassisApi", chassisApi)
@@ -127,6 +133,36 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
     setPreviousVelocity(currentVelocity);*/
 
   }, [controls, vehicleApi, chassisApi]);
+
+  useEffect(() => {
+   
+    let cameraDirection = new Vector3();
+    let carPosition = new Vector3(...car.currentPosition);
+    camera.getWorldDirection(cameraDirection);
+    const bulletDirection = cameraDirection.clone().multiplyScalar(bulletSpeed);
+    const bulletPosition = carPosition.clone().add(cameraDirection.multiplyScalar(0.2));
+    const handleMouseDown = (e) => {
+      if (e.button === 0) {
+        const now = Date.now();
+        if (now >= state.current.timeToShoot) {
+          state.current.timeToShoot = now + bulletCoolDown;
+          setBullets((bullets) => [
+            ...bullets,
+            {
+              id: now,
+              position: [bulletPosition.x, bulletPosition.y, bulletPosition.z],
+              forward: [bulletDirection.x, bulletDirection.y, bulletDirection.z]
+            }
+          ]);
+        }
+      }
+    };
+    document.addEventListener("mousedown", handleMouseDown);
+    return () => {
+      document.removeEventListener("mousedown", handleMouseDown);
+    };
+  }, [car]);
+
 
   return controls;
 }

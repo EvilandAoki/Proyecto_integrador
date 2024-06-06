@@ -111,7 +111,6 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
       chassisApi.rotation.set(0, 0, 0);
       console.log(chassisApi)
     }
-
     // Calcula la aceleración
     /*const currentVelocity = chassisApi.current?.velocity;
     console.log(currentVelocity, "velocidad")
@@ -135,25 +134,32 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
   }, [controls, vehicleApi, chassisApi]);
 
   useEffect(() => {
-   
+    //shooting
     let cameraDirection = new Vector3();
     let carPosition = new Vector3(...car.currentPosition);
     camera.getWorldDirection(cameraDirection);
     const bulletDirection = cameraDirection.clone().multiplyScalar(bulletSpeed);
-    const bulletPosition = carPosition.clone().add(cameraDirection.multiplyScalar(0.2));
+    const bulletPosition = carPosition.clone().add(cameraDirection.multiplyScalar(0.5));
     const handleMouseDown = (e) => {
       if (e.button === 0) {
         const now = Date.now();
         if (now >= state.current.timeToShoot) {
           state.current.timeToShoot = now + bulletCoolDown;
-          setBullets((bullets) => [
-            ...bullets,
-            {
-              id: now,
-              position: [bulletPosition.x, bulletPosition.y, bulletPosition.z],
-              forward: [bulletDirection.x, bulletDirection.y, bulletDirection.z]
+          setBullets((bullets) => {
+            if(bullets.length > 15){
+              return [{
+                id: now,
+                position: [bulletPosition.x, bulletPosition.y, bulletPosition.z],
+                forward: [bulletDirection.x, 0.01, bulletDirection.z]
+              }]
             }
-          ]);
+            return [...bullets,
+              {
+                id: now,
+                position: [bulletPosition.x, bulletPosition.y, bulletPosition.z],
+                forward: [bulletDirection.x, 0.01, bulletDirection.z]
+              }]
+          });
         }
       }
     };

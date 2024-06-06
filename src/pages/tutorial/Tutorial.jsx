@@ -12,6 +12,7 @@ import { Vector3 } from "three";
 
 import { Debug, Physics } from "@react-three/cannon"
 import { CubeCar } from "../../components/cars/CubeCar"
+import EnemyCar from "../../components/cars/EnemyCar"
 import Tire from "../../components/Tire"
 import TurboItem from "../../components/TurboItem"
 import { useCarContext } from "../../context"
@@ -49,6 +50,7 @@ export const TutorialLevel = () => {
                         <Suspense>
                             <TutorialMap />
                             <CubeCar thirdPerson={thirdPerson} />
+                            <EnemyCar />
                             {/* <Supra /> */}
                             <TurboItem key={'turbo1'} x={0} z={10} />
                             <TurboItem key={'turbo2'} x={0} z={30} />

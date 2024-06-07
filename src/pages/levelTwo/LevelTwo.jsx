@@ -15,7 +15,7 @@ const URLENVIRONMENT2 = '/assets/textures/dikhololo_night_1k.hdr'
 
 export const LevelTwo = () => {
     const [thirdPerson, setThirdPerson] = useState(false);
-    const [cameraPosition, setCameraPosition] = useState([-20, 3.9, 6.21]);
+    const [cameraPosition, setCameraPosition] = useState([20, 53.9, 126.21]);
 
     const { car } = useCarContext()
     return (
@@ -25,7 +25,7 @@ export const LevelTwo = () => {
                     fov: 45,
                     near: 0.7,
                     far: 300,
-                    position: [5, 4, 5]
+                    position: [20, 54, 50]
                 }}
             >
                 <Environment files={URLENVIRONMENT2} background={"both"} />
@@ -35,13 +35,13 @@ export const LevelTwo = () => {
                     color={'red'}
                 >
                     <CubeCar thirdPerson={thirdPerson} />
-                    <PerspectiveCamera makeDefault position={[0, 10, 20]} />
+                    <PerspectiveCamera makeDefault position={[10, 10, 20]} />
                     <CameraControls />
                     <color attach="background" args={["#ececec"]} />
                     <LightsTutorial />
                     <Perf />
                     <WorldTwo />
-                    <Ramp position={[-7.5, -1.5, 2.5]} rotation={[0, -4.7, Math.PI / 8]} args={[4, 2, 2]} />
+                    
                 </Physics>
                 <TextFloat position={[-1.2, -1, -2]} text={"texto de prueba"} />
             </Canvas>

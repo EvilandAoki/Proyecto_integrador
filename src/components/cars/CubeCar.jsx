@@ -44,7 +44,6 @@ export const CubeCar = ({ thirdPerson }) => {
             args: chassisBodyArgs,
             mass: 150,
             position,
-            onCollide: true
         })
     )
 
@@ -90,12 +89,12 @@ export const CubeCar = ({ thirdPerson }) => {
 
     return (
         <>
-            <group ref={vehicle} name="vehicle">
+            <group ref={vehicle} name="PLAYER">
                 {/* <mesh ref={chassisBody}>
                     <meshBasicMaterial transparent={true} opacity={0.4} />
                     <boxGeometry args={chassisBodyArgs} />
                 </mesh> */}
-                <group ref={chassisBody} name="chassisBody">
+                <group ref={chassisBody} name="PLAYER">
                     <primitive object={result} rotation-y={Math.PI} position={[0, -0.01, 0]} />
                 </group>
                 <WheelDebug wheelRef={wheels[0]} radius={wheelRadius} />

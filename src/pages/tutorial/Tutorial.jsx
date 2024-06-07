@@ -24,7 +24,7 @@ export const TutorialLevel = () => {
     const [thirdPerson, setThirdPerson] = useState(true);
     const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
     const [aceleracion, setAceleracion] = useState(0);
-    const { car } = useCarContext()
+    const { car, velocity } = useCarContext()
 
     return (
         <>
@@ -43,8 +43,6 @@ export const TutorialLevel = () => {
                     frictionGravity={[0, 1, 0]}
                     defaultContactMaterial={{ restitution: 0.3 }}
                 >
-                    <Debug color="red">
-
                         <color attach="background" args={["#ececec"]} />
                         <LightsTutorial />
                         <Suspense>
@@ -64,13 +62,12 @@ export const TutorialLevel = () => {
                             <Tire key={'tire5'}  x={60} z={-55}/>
                             <FinishLine currentLevel={0} x={40} z={11.1}/>
                         </Suspense>
-                    </Debug>
                 </Physics>
             
                 <Perf />
             
             </Canvas>
-        <AceleracionVelocimetro aceleracion={aceleracion} />
+        <AceleracionVelocimetro aceleracion={velocity} />
         <LivesDisplay lives={2} />
             <div style={{position: "absolute", top: 1, rigth: 2}} className="boder pt-4 ps-4">
                 {car.turbo && 

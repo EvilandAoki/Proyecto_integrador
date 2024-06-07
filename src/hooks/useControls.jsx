@@ -5,6 +5,9 @@ import { useCarContext } from "../context/CarControlsContext"
 
 const bulletCoolDown = 300;
 const bulletSpeed = 30;
+
+const vel = 0.1;
+const speedLimit = 100;
 export const useControls = (vehicleApi, chassisApi , onFrame) => {
 
   const { camera } = useThree();
@@ -14,7 +17,7 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
   const [brakeForce, setBrakeForce] = useState(0);
   const [turboStartTime, setTurboStartTime] = useState(null);
 
-  const { car, setCarValue, setBullets } = useCarContext()
+  const { car, setCarValue, setBullets, setVelocity } = useCarContext()
 
   const state = useRef({
     timeToShoot: 0,
@@ -50,23 +53,30 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
 
     let speedMulti = 1;
     if (controls.shift && car.turbo) {
+      
       if(!turboStartTime){ //Tomar el momento que se uso el turbo
         setTurboStartTime(Date.now());
       }
       state.camera.fov = 100 
+      let swaySpeed = 60
+      let swayValue = (50 / 100 + 0.25) * 30
+      state.camera.rotation.z += (Math.sin(state.clock.elapsedTime * swaySpeed * 0.9) / 1000) * swayValue
+      state.camera.rotation.x += (Math.sin(state.clock.elapsedTime * swaySpeed) / 1000) * swayValue
       speedMulti = 2 
     } else {
       state.camera.fov = 80 
       speedMulti =  1
     }
-    
     if (controls.w) {
+        setVelocity((v) => v < speedLimit * speedMulti  ? v + (vel * speedMulti) : speedLimit * speedMulti)
         vehicleApi.applyEngineForce(150 * speedMulti, 2);
         vehicleApi.applyEngineForce(150 * speedMulti, 3);
     } else if (controls.s) {
+      setVelocity((v) => v > 0 ? v - vel : 0)
       vehicleApi.applyEngineForce(-150, 2);
       vehicleApi.applyEngineForce(-150, 3);
     } else {
+      setVelocity((v) => v > 0 ? v - vel : 0)
       vehicleApi.applyEngineForce(0, 2);
       vehicleApi.applyEngineForce(0, 3);
     }
@@ -93,9 +103,11 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
     if (controls.arrowright) chassisApi.applyLocalImpulse([0, -3, 0], [+0.5, 0, 0]);
 
     if (controls[" "]) {
-
+      setVelocity((v) => v >  0 ? v - (4 * vel): 0   );
       vehicleApi.setBrake(3, 2);
       vehicleApi.setBrake(3, 3);
+      vehicleApi.setBrake(3, 0);
+      vehicleApi.setBrake(3,  1);
     } else {
       vehicleApi.setBrake(0, 0);
       vehicleApi.setBrake(0, 1);
@@ -111,25 +123,12 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
       chassisApi.rotation.set(0, 0, 0);
       console.log(chassisApi)
     }
-    // Calcula la aceleración
-    /*const currentVelocity = chassisApi.current?.velocity;
-    console.log(currentVelocity, "velocidad")
-    const previousVelocityVector = new Vector3(...previousVelocity);
-    const currentVelocityVector = new Vector3(...currentVelocity);
 
-    // Calcula la aceleración con las diferencias de velocidad
-    const delta = 1; // Aquí puedes obtener el delta de tiempo entre frames si tienes acceso a él
-    const acceleration = new Vector3()
-        .subVectors(currentVelocityVector, previousVelocityVector)
-        .divideScalar(delta);
-
-    // Llama a `onFrame` para manejar la aceleración.
-    if (onFrame) {
-        onFrame(acceleration.length());
+    if(controls.f){
+      console.log('ffff')
     }
 
-    // Actualiza la velocidad anterior
-    setPreviousVelocity(currentVelocity);*/
+    // Calcula la aceleración
 
   }, [controls, vehicleApi, chassisApi]);
 
@@ -146,18 +145,11 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
         if (now >= state.current.timeToShoot) {
           state.current.timeToShoot = now + bulletCoolDown;
           setBullets((bullets) => {
-            if(bullets.length > 15){
-              return [{
-                id: now,
-                position: [bulletPosition.x, bulletPosition.y, bulletPosition.z],
-                forward: [bulletDirection.x, 0.01, bulletDirection.z]
-              }]
-            }
             return [...bullets,
               {
                 id: now,
-                position: [bulletPosition.x, bulletPosition.y, bulletPosition.z],
-                forward: [bulletDirection.x, 0.01, bulletDirection.z]
+                position: [bulletPosition.x, -0.8, bulletPosition.z],
+                forward: [bulletDirection.x, 0, bulletDirection.z]
               }]
           });
         }
@@ -168,7 +160,6 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
       document.removeEventListener("mousedown", handleMouseDown);
     };
   }, [car]);
-
 
   return controls;
 }

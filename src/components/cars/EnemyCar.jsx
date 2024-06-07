@@ -7,17 +7,24 @@ import { useLoader, useFrame } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/Addons.js";
 import { useCarContext } from "../../context/CarControlsContext"
 import { Vector3 } from "three";
+import { useNavigate } from "react-router-dom";
 
 const scale = 0.08
 const followDistance = 2;
 const frontAngleThreshold = Math.PI / 4; 
+const collideCoolDown = 1000;
 const EnemyCar = (props) => {
     let result = useLoader(
         GLTFLoader,
         "/assets/models/cars/enemy.glb"
     ).scene;
+    const navigate = useNavigate();
 
-    const { car } = useCarContext()
+    const { car, setLives, chassisBodyCar } = useCarContext()
+
+    const state = useRef({
+        timeToCollibe: 0,
+      })
 
     useEffect(() => {
         if (!result) return;
@@ -89,7 +96,6 @@ const EnemyCar = (props) => {
     )
 
     const handleCollide = (e) => {
-        console.log("carro enemigo", e.body.parent.name)
         const collidedWith = e.body.parent.name
         if(collidedWith == 'BULLET'){
             setTimeout(() => {
@@ -97,10 +103,19 @@ const EnemyCar = (props) => {
                 chassisApi.position.set(0, -100, 0);
             }, 2000);
         }
-        if(collidedWith == 'PLAYER'){
-            console.log('-1hp')
+        const now = Date.now();
+        if(collidedWith == 'PLAYER' && now >= state.current.timeToCollibe){
+            state.current.timeToCollibe = now + collideCoolDown;
+            setLives(val => { 
+                let newVal = val - 1;
+                if(newVal <= 0){
+                    navigate('/')
+                    return 3
+                }else {
+                    return newVal
+                }
+            })
         }
-         //e.parent.body.name = ENEMY => -1hp
     };
 
     return (

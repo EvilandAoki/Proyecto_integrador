@@ -24,7 +24,7 @@ export const TutorialLevel = () => {
     const [thirdPerson, setThirdPerson] = useState(true);
     const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
     const [aceleracion, setAceleracion] = useState(0);
-    const { car, velocity } = useCarContext()
+    const { car, velocity, lives } = useCarContext()
 
     return (
         <>
@@ -63,12 +63,10 @@ export const TutorialLevel = () => {
                             <FinishLine currentLevel={0} x={40} z={11.1}/>
                         </Suspense>
                 </Physics>
-            
                 <Perf />
-            
             </Canvas>
         <AceleracionVelocimetro aceleracion={velocity} />
-        <LivesDisplay lives={2} />
+        <LivesDisplay lives={lives} />
             <div style={{position: "absolute", top: 1, rigth: 2}} className="boder pt-4 ps-4">
                 {car.turbo && 
                     <div className="border border-info rounded shadow-lg p-2"> 

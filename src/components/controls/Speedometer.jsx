@@ -1,4 +1,3 @@
-import React from 'react';
 import Speedometer from 'react-d3-speedometer';
 
 const AceleracionVelocimetro = ({ aceleracion  }) => {

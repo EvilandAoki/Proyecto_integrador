@@ -26,7 +26,7 @@ export const WorldOne = (props) => {
             {/* Pista horizontal */}
             <Plane position={[0, -0.81, -30]} rotation={[-Math.PI / 2, 0, 0]} args={[100, 100]} color="grey" />
             <Wall />
-            <WallToEnd />
+            <WallToEnd position={[4.3, -0.6, -28]} scale={[2.5, 3, 0.2]} />
             {
                 //Base
             }

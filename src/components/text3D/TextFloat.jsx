@@ -7,7 +7,7 @@ export const TextFloat = (props) => {
 
     return (
         <Float
-            speed={1.5}
+            speed={0}
             rotationIntensity={0.01}
             floatIntensity={0.5}
             floatingRange={[1, 2]}
@@ -24,7 +24,7 @@ export const TextFloat = (props) => {
                     letterSpacing={0.05}
                     size={0.15}
                 >
-                    <meshBasicMaterial color={"white"}  />
+                    <meshBasicMaterial color={props.color}  />
                     {props.text}
                 </Text3D>
             </Center>

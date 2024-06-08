@@ -16,6 +16,7 @@ import Tire from "../../components/Tire"
 import TurboItem from "../../components/TurboItem"
 import EnemyCar from "../../components/cars/EnemyCar"
 import LivesDisplay from "../../components/controls/Lifes"
+import { SiTurbo } from "react-icons/si";
 
 const URLENVIRONMENT2 = '/assets/textures/dikhololo_night_1k.hdr'
 
@@ -59,7 +60,7 @@ export const LevelTwo = () => {
                     <TurboItem key={'turbo6'} x={28} z={-24} />
                     <TurboItem key={'turbo7'} x={-2} z={-13} />
                     <TurboItem key={'turbo8'} x={-17} z={-13} />
-                    <EnemyCar position={[-1.2, 0.5, 3]} />
+                    <EnemyCar key="enemy1" position={[2.6, 0.1, -20.5]} rot={[0, 2.9, 0]} />
                 </Physics>
                 <TextFloat position={[-1.2, 0.2, -2]} text={"sigue el color"} color={"red"} />
                 <TextFloat position={[-1.2, 0.6, -2]} text={"dispara con la E"} color={"red"} />

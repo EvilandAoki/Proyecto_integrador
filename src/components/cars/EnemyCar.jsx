@@ -10,7 +10,7 @@ import { Vector3 } from "three";
 import { useNavigate } from "react-router-dom";
 
 const scale = 0.08
-const followDistance = 2;
+const followDistance = 5;
 const frontAngleThreshold = Math.PI / 4; 
 const collideCoolDown = 1000;
 const EnemyCar = (props) => {
@@ -20,7 +20,7 @@ const EnemyCar = (props) => {
     ).scene;
     const navigate = useNavigate();
 
-    const { car, setLives, chassisBodyCar } = useCarContext()
+    const { car, setLives } = useCarContext()
 
     const state = useRef({
         timeToCollibe: 0,
@@ -47,6 +47,7 @@ const EnemyCar = (props) => {
             args: chassisBodyArgs,
             mass: 10,
             position,
+            rotation: props?.rot ||  [0, Math.PI, 0],
             onCollide: handleCollide
         })
     )
@@ -117,9 +118,8 @@ const EnemyCar = (props) => {
             })
         }
     };
-
     return (
-        <group ref={vehicle} name="ENEMY">
+        <group  ref={vehicle}  name="ENEMY">
             <group ref={chassisBody} name="ENEMY">
                 <primitive object={result} rotation-y={Math.PI} position={[0, -0.01, 0]} />
             </group>

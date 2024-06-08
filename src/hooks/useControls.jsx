@@ -106,8 +106,6 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
       setVelocity((v) => v >  0 ? v - (4 * vel): 0   );
       vehicleApi.setBrake(3, 2);
       vehicleApi.setBrake(3, 3);
-      vehicleApi.setBrake(3, 0);
-      vehicleApi.setBrake(3,  1);
     } else {
       vehicleApi.setBrake(0, 0);
       vehicleApi.setBrake(0, 1);

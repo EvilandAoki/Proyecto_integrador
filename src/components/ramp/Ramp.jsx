@@ -2,7 +2,7 @@ import { useBox } from "@react-three/cannon"
 import { useRef } from "react"
 
 
-export const Ramp = ({ position, rotation, args }) => {
+export const Ramp = ({ position, rotation, args, color }) => {
 
     // datos del box
     //  <Ramp args={[30, 6, 8]} position={[2, -1, 168.55]} rotation={[0, 0.49, Math.PI / 15]} />
@@ -18,7 +18,7 @@ export const Ramp = ({ position, rotation, args }) => {
     return (
         <mesh castShadow receiveShadow ref={rampBody}>
             <boxGeometry args={args} />
-            <meshStandardMaterial color="indianred" />
+            <meshStandardMaterial color={color} />
         </mesh>
     )
 }

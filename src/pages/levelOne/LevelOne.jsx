@@ -76,7 +76,6 @@ export const LevelOne = () => {
                         <SiTurbo size={50} className="text-info" />
                     </div>}
             </div>
-
         </>
 
     )

@@ -7,7 +7,6 @@ const WelcomeView = (props) => {
     const onHandleButtonStart = () => {
         console.log("Iniciar Juego");
     }
-    console.log(modalActive)
     return modalActive && ( 
         <div className="container-modal">    
             <div class="contenido-modal d-flex flex-column justify-content-around h-100 bg-modal bg-opacity-50 rounded shadow-lg  py-2 px-4">            

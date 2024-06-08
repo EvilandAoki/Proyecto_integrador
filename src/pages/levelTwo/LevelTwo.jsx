@@ -21,7 +21,7 @@ import { SiTurbo } from "react-icons/si";
 const URLENVIRONMENT2 = '/assets/textures/dikhololo_night_1k.hdr'
 
 export const LevelTwo = () => {
-    const [thirdPerson, setThirdPerson] = useState(false);
+    const [thirdPerson, setThirdPerson] = useState(true);
     const [cameraPosition, setCameraPosition] = useState([20, 53.9, 126.21]);
 
     const { car, lives } = useCarContext()

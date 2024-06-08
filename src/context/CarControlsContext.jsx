@@ -25,6 +25,11 @@ export const CarProvider = ({ children }) => {
 
     const [modalActive, setModalActive] = useState(false);
 
+    const [bullets, setBullets] = useState([]);
+
+    const [velocity, setVelocity] = useState(0)
+    const [lives, setLives] = useState(3)
+
     // useEffect(() => {
     //     console.log(timeLevel, 'cambio este timeLevel?')
     // }, [timeLevel])
@@ -89,7 +94,13 @@ export const CarProvider = ({ children }) => {
                 timeLevel,
                 setTimeLevel,
                 modalActive,
-                setModalActive
+                setModalActive,
+                bullets,
+                setBullets,
+                velocity, 
+                setVelocity,
+                lives, 
+                setLives
             }}
         >
             {children}

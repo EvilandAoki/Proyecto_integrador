@@ -34,7 +34,7 @@ const EnemyCar = (props) => {
         mesh.children[0].position.set(0, -0.5, -1.5);
     }, [result]);
 
-    const position = [-1.2, 0.5, 3];
+    const position = props.position;
     const width = 0.15;
     const height = 0.07;
     const front = 0.15;

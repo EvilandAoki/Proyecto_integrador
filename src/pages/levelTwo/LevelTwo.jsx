@@ -14,14 +14,16 @@ import WelcomeText from "./../../components/views/ModalViews";
 import Stopwatch from "../../components/controls/Stopwatch"
 import Tire from "../../components/Tire"
 import TurboItem from "../../components/TurboItem"
+import EnemyCar from "../../components/cars/EnemyCar"
+import LivesDisplay from "../../components/controls/Lifes"
 
 const URLENVIRONMENT2 = '/assets/textures/dikhololo_night_1k.hdr'
 
 export const LevelTwo = () => {
-    const [thirdPerson, setThirdPerson] = useState(false);
+    const [thirdPerson, setThirdPerson] = useState(true);
     const [cameraPosition, setCameraPosition] = useState([20, 53.9, 126.21]);
 
-    const { car } = useCarContext()
+    const { car, lives } = useCarContext()
     return (
         <>
             <Canvas
@@ -57,12 +59,14 @@ export const LevelTwo = () => {
                     <TurboItem key={'turbo6'} x={28} z={-24} />
                     <TurboItem key={'turbo7'} x={-2} z={-13} />
                     <TurboItem key={'turbo8'} x={-17} z={-13} />
+                    <EnemyCar position={[-1.2, 0.5, 3]} />
                 </Physics>
-                <TextFloat position={[-1.2, -0.9, -2]} text={"sigue el color"} color={"red"} />
-                <TextFloat position={[-1.2, -1.1, -2]} text={"dispara con la E"} color={"red"} />
-                <TextFloat position={[-14, -1, -6]} text={"salta hacia delante"} color={"red"} />
-                <TextFloat position={[-4, -1, -20]} text={"encuentra la rampa"} color={"white"} />
+                <TextFloat position={[-1.2, 0.2, -2]} text={"sigue el color"} color={"red"} />
+                <TextFloat position={[-1.2, 0.6, -2]} text={"dispara con la E"} color={"red"} />
+                <TextFloat position={[-14, 0.2, -6]} text={"salta hacia delante"} color={"red"} />
+                <TextFloat position={[-4, 0.2, -20]} text={"encuentra la rampa"} color={"white"} />
             </Canvas>
+            <LivesDisplay lives={lives} />
             <Stopwatch />
             <WelcomeText Level={3} />
             <div style={{ position: "absolute", top: 1, rigth: 2 }} className="boder pt-4 ps-4">

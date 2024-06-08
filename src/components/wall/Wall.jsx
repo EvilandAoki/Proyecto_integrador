@@ -1,6 +1,7 @@
 import { useBox, usePlane } from '@react-three/cannon';
 import React, { useState } from 'react'
-import { useCarContext } from '../../context/CarControlsContext';
+import { useCarContext } from '../../context';
+
 
 export const Wall = () => {
 

@@ -48,7 +48,7 @@ export const TutorialLevel = () => {
                         <Suspense>
                             <TutorialMap />
                             <CubeCar thirdPerson={thirdPerson} />
-                            <EnemyCar />
+                            <EnemyCar position={[-1.2, 0.5, 3]} />
                             {/* <Supra /> */}
                             <TurboItem key={'turbo1'} x={0} z={10} />
                             <TurboItem key={'turbo2'} x={0} z={30} />

@@ -1,7 +1,7 @@
 import { useBox } from '@react-three/cannon';
 import React, { useCallback, useEffect } from 'react'
-import { useCarContext } from '../../context/CarControlsContext';
-import { useAuth } from '../../context';
+
+import { useAuth, useCarContext } from '../../context';
 
 export const WallToEnd = ({position, scale}) => {
 

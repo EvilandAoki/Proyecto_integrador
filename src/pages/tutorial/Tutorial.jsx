@@ -12,6 +12,7 @@ import { Vector3 } from "three";
 
 import { Debug, Physics } from "@react-three/cannon"
 import { CubeCar } from "../../components/cars/CubeCar"
+import EnemyCar from "../../components/cars/EnemyCar"
 import Tire from "../../components/Tire"
 import TurboItem from "../../components/TurboItem"
 import { useCarContext } from "../../context"
@@ -23,7 +24,7 @@ export const TutorialLevel = () => {
     const [thirdPerson, setThirdPerson] = useState(true);
     const [cameraPosition, setCameraPosition] = useState([-6, 3.9, 6.21]);
     const [aceleracion, setAceleracion] = useState(0);
-    const { car } = useCarContext()
+    const { car, velocity, lives } = useCarContext()
 
     return (
         <>
@@ -42,13 +43,12 @@ export const TutorialLevel = () => {
                     frictionGravity={[0, 1, 0]}
                     defaultContactMaterial={{ restitution: 0.3 }}
                 >
-                    <Debug color="red">
-
                         <color attach="background" args={["#ececec"]} />
                         <LightsTutorial />
                         <Suspense>
                             <TutorialMap />
                             <CubeCar thirdPerson={thirdPerson} />
+                            <EnemyCar position={[-1.2, 0.5, 3]} />
                             {/* <Supra /> */}
                             <TurboItem key={'turbo1'} x={0} z={10} />
                             <TurboItem key={'turbo2'} x={0} z={30} />
@@ -62,14 +62,11 @@ export const TutorialLevel = () => {
                             <Tire key={'tire5'}  x={60} z={-55}/>
                             <FinishLine currentLevel={0} x={40} z={11.1}/>
                         </Suspense>
-                    </Debug>
                 </Physics>
-            
                 <Perf />
-            
             </Canvas>
-        <AceleracionVelocimetro aceleracion={aceleracion} />
-        <LivesDisplay lives={2} />
+        <AceleracionVelocimetro aceleracion={velocity} />
+        <LivesDisplay lives={lives} />
             <div style={{position: "absolute", top: 1, rigth: 2}} className="boder pt-4 ps-4">
                 {car.turbo && 
                     <div className="border border-info rounded shadow-lg p-2"> 

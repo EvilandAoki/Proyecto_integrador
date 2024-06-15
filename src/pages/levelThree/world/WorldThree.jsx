@@ -1,32 +1,30 @@
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 import { RigidBody } from '@react-three/rapier'
+import { usePlane } from '@react-three/cannon';
+
+const Plane = ({ position, rotation, args, color }) => {
+    const [ref] = usePlane(() => ({
+        rotation: [-Math.PI / 2, 0, 0],
+        position: position, // Posición del piso
+        type: 'trimesh',
+        args: args
+    }));
+
+    return (
+        <mesh ref={ref} position={position} rotation={rotation} receiveShadow>
+            <planeGeometry args={args} />
+            <meshBasicMaterial color={color} />
+        </mesh>
+    );
+};
 
 export const WorldThree = (props) => {
-    const { nodes, materials } = useGLTF('/assets/models/maps/mapThree/LevelThree.glb')
     return (
-        <RigidBody colliders="trimesh" type='fixed'>
-            <group {...props} dispose={null}>
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Walls.geometry}
-                material={materials['Material.003']}
-            />
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Floor.geometry}
-                material={materials['Material.001']}
-            />
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Plane.geometry}
-                material={materials['Material.002']}
-            />
-            </group>
-        </RigidBody>
+        <>
+            <Plane position={[0, -0.81, -30]} rotation={[-Math.PI / 2, 0, 0]} args={[100, 100]} color="grey" />
+        </>
     )
-    
 }
+
+

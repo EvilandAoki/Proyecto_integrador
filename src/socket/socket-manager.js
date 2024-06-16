@@ -8,4 +8,4 @@ const urlDeployServer = "https://sphere-websockets-r3f-server.onrender.com";
 /**
  * Socket connection
  */
-export const socket = socketIOClient(urlDeployServer);
+export const socket =  socketIOClient(urlLocalServer);

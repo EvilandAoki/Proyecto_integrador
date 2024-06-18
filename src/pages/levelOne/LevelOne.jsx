@@ -1,15 +1,10 @@
-import { Environment, KeyboardControls, OrbitControls, PerspectiveCamera, useKeyboardControls } from '@react-three/drei'
+import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-
 import { Perf } from 'r3f-perf'
 import React, { Suspense, useState } from 'react'
 import { WorldOne } from './world/WorldOne'
 import { LightsOne } from './lights/LightsOne'
-import Supra from '../../components/cars/Supra'
 import { Debug, Physics } from '@react-three/cannon'
-import { Wheel } from '../../components/cars/porsche/Wheel'
-import { Chassis } from '../../components/cars/porsche/Chassis'
-import { Vehicle } from '../../components/cars/porsche/Vehicle'
 import { CubeCar } from '../../components/cars/CubeCar'
 import Stopwatch from "./../../components/controls/Stopwatch"
 import Tire from '../../components/Tire'

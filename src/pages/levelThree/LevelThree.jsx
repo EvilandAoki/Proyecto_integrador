@@ -7,6 +7,8 @@ import { WorldThree } from "./world/WorldThree"
 import { LightsTutorial } from "./lights/lightsTutorial"
 import CarControls, { CarKeyboardControls } from "../../components/controls/CarControls"
 import { Physics } from "@react-three/cannon"
+import { CubeCar } from "../../components/cars/CubeCar"
+import Player2 from "../../components/Player2"
 
 const URLENVIRONMENT = '/assets/textures/envmap.hdr'
 const URLENVIRONMENT2 = '/assets/textures/dikhololo_night_1k.hdr'
@@ -38,6 +40,8 @@ export const LevelThree = () => {
             >
                 <Suspense>
                     <WorldThree />
+                    <CubeCar thirdPerson={thirdPerson} isSharing={true} />
+                    <Player2 />
                 </Suspense>
             </Physics>
             <Perf />

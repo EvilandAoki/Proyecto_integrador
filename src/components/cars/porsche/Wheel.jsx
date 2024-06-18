@@ -5,8 +5,8 @@ import { useCarContext } from "../../../context";
 
 export const Wheel = forwardRef(({ leftSide, ...props }, ref) => {
   
-  console.log(leftSide, "leftSide")
-  console.log(ref, "ref")
+  // console.log(leftSide, "leftSide")
+  // console.log(ref, "ref")
 
   const { nodes, materials } = useGLTF('public/assets/models/cars/wheel-draco.glb')
   const radius = 0.38

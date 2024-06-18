@@ -61,10 +61,10 @@ export const CarControls = () => {
                 quaternion.y = -1
             } else if (345 < currDirection || 15 > currDirection) {
                 quaternion.y += rotationalSpeed
-                console.log( rotationalSpeed)
+                // console.log( rotationalSpeed)
             } else {
                 quaternion.y += rotationalSpeed / 10
-                console.log(rotationalSpeed / 10)
+                // console.log(rotationalSpeed / 10)
             }
             body.setRotation(quaternion, true)
         }
@@ -92,8 +92,8 @@ export const CarControls = () => {
                 newImpulse.x -= x
             }
             
-            console.log('Z: ', newImpulse.z)
-            console.log('X: ', newImpulse.x )
+            // console.log('Z: ', newImpulse.z)
+            // console.log('X: ', newImpulse.x )
         }
         if(currDirection >= 90 && currDirection < 180){
             console.log('2')
@@ -108,8 +108,8 @@ export const CarControls = () => {
                 newImpulse.x -=  x
             }
             
-            console.log('Z: ', newImpulse.z)
-            console.log('X: ', newImpulse.x )
+            // console.log('Z: ', newImpulse.z)
+            // console.log('X: ', newImpulse.x )
         }
         if(currDirection >= 180 && currDirection < 270){
             console.log('3')
@@ -124,8 +124,8 @@ export const CarControls = () => {
                 newImpulse.x += x
             }
             
-            console.log('Z: ', newImpulse.z)
-            console.log('X: ', newImpulse.x )
+            // console.log('Z: ', newImpulse.z)
+            // console.log('X: ', newImpulse.x )
         }
         if(currDirection >= 270 && currDirection <= 360){
             console.log('4')
@@ -139,8 +139,8 @@ export const CarControls = () => {
                 newImpulse.z += z
                 newImpulse.x += x
             }
-            console.log('Z: ', newImpulse.z)
-            console.log('X: ', newImpulse.x )
+            // console.log('Z: ', newImpulse.z)
+            // console.log('X: ', newImpulse.x )
         }
         return newImpulse
     }

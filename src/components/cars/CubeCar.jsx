@@ -9,9 +9,10 @@ import { Quaternion, Vector3 } from "three";
 import { GLTFLoader } from "three/examples/jsm/Addons.js";
 import { useCarContext } from "../../context/CarControlsContext";
 import Bullet from "../Bullet";
+import { socket } from "../../socket/socket-manager";
 
 
-export const CubeCar = ({ thirdPerson }) => {
+export const CubeCar = ({ thirdPerson, isSharing }) => {
 
     const { setCarValue, bullets } = useCarContext()
 
@@ -87,6 +88,25 @@ export const CubeCar = ({ thirdPerson }) => {
     });
 
 
+    useEffect(() => {
+        let timer;
+        if(isSharing && chassisApi){
+            const { position, rotation } = chassisApi
+            let dataToShare = {
+                position: chassisBody.current.position,
+                rotation: chassisBody.current.rotation
+            }
+            position.subscribe(value => dataToShare.position = value)
+            rotation.subscribe(value => dataToShare.rotation = value)
+            timer = setInterval(() => {
+                socket.emit("player-moving", dataToShare)
+            }, 100);
+        }
+        return () => {
+            clearTimeout(timer)
+        }
+    },[isSharing])
+    
     return (
         <>
             <group ref={vehicle} name="PLAYER">

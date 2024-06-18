@@ -19,26 +19,39 @@ const WelcomeView = (props) => {
         if (!gameInfo) {
             return null
         }
+        if (gameInfo.lastLevel > props.Level) {
+            nagivate(LEVELS_KEYS[props.Level + 1]);
+            setModalActive(false);
+        } else {
         levelComplete({
-            lastLevel: props.Level,
-        }).then(() => nagivate("/levelTwo"));
-        setModalActive(false)
+            lastLevel: props.Level + 1,
+        }).then(() => nagivate(LEVELS_KEYS[props.Level + 1]));
+        setModalActive(false)}
     }
     const onHandleButtonReturnToMenu = () => {
         if (!gameInfo) {
             return null
         }
-        levelComplete({
-            lastLevel: props.Level,
-        }).then(() => nagivate("/"));
-        setModalActive(false)
+        if (gameInfo.lastLevel > props.Level) {
+            nagivate("/");
+            setModalActive(false)
+        } else {
+            levelComplete({
+                lastLevel: props.Level + 1,
+            }).then(() => nagivate("/"));
+            setModalActive(false)
+        }
     }
     return modalActive && (
         <div className="container-modal">
             <div class="contenido-modal d-flex flex-column justify-content-around h-100 bg-modal bg-opacity-50 rounded shadow-lg  py-2 px-4">
                 <div className="title-modal">
                     <h2>¡Felicidades!</h2>
-                    <h3>Completaste el nivel {props.Level -1}</h3>
+                    <h3>
+                        {
+                            props?.Level == 0 ? `Completaste el tutorial` : `Completaste el nivel ${props.Level - 1}`
+                        }
+                    </h3>
                 </div>
                 <div className="buttons-modal">
                     <button onClick={onHandleButtonReturnToMenu} className="button-start">Volver al Menu</button>

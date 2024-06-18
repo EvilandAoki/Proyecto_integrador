@@ -1,16 +1,16 @@
 import { useBox } from '@react-three/cannon';
 import React, { useCallback, useEffect } from 'react'
-
+import { useLocation } from "react-router-dom";
 import { useAuth, useCarContext } from '../../context';
 
-export const WallToEnd = ({position, scale}) => {
+export const WallToEnd = ({ position, scale }) => {
 
     const { setStartToEnd, startToEnd, timeLevel, setModalActive } = useCarContext();
     const { levelComplete } = useAuth();
+    const location = useLocation();
 
-    // const position = [4.3, -0.6, -28]
-    // const position = [3.3, -0.1, -6]
-    // const scale = [2.5, 3, 0.2]
+    console.log(location.pathname, "my location")
+
     const color = "red"
 
     useEffect(() => {
@@ -20,6 +20,10 @@ export const WallToEnd = ({position, scale}) => {
     }, [startToEnd])
 
     const handleCollide = useCallback((e) => {
+        console.log("prueba")
+        if (location.pathname == "/tutorial") {
+            setModalActive(true)
+        }
         setStartToEnd(false)
         setModalActive(true)
     }, [timeLevel]);

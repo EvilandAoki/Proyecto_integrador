@@ -2,6 +2,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../firebase.config"
 import { createGameData, updateGameData } from "../db/gameData-collection";
+import { useLocation } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -49,9 +50,8 @@ export const AuthProvider = ({ children }) => {
             ...levelData
         })
         saveGameInfo(res.userData)
-
-        console.log(levelData, "levelData")
-        console.log(res.userData, "userData LocalStorage")
+        // console.log(levelData, "levelData")
+        // console.log(res.userData, "userData LocalStorage")
     }
 
     const loadInfo = async () => {

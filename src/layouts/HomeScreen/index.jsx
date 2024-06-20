@@ -2,10 +2,11 @@ import { useState } from "react";
 
 import "./styles.css";
 import LOGO_UNIVALLE from "/public/logo-univalle.png";
+import { useNavigate } from "react-router-dom";
 
 const HomeScreen = (props) => {
     const { children } = props;
-
+    const navigate = useNavigate();
     const [currentScreen, setCurrentScreen] = useState(0);
 
     const handleScreen = (screenKey) => () => {
@@ -33,6 +34,9 @@ const HomeScreen = (props) => {
                                 </button>
                                 <button className="btn btn-secondary mb-4">
                                     NUEVO JUEGO
+                                </button>
+                                <button className="btn btn-secondary mb-4" onClick={navigate("/levelThree")}>
+                                    MULTIJUGADOR
                                 </button>
                                 <button className="btn btn-secondary mb-4">
                                     CONTROLES
@@ -62,7 +66,7 @@ const HomeScreen = (props) => {
                             </button>
                         </div>
                     </div>
-                    
+
                 </div>
             );
         default:

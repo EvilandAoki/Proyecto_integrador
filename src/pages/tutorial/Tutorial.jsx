@@ -15,6 +15,7 @@ import TurboItem from "../../components/TurboItem"
 import { useCarContext } from "../../context"
 import { SiTurbo } from "react-icons/si";
 import WelcomeText from "./../../components/views/ModalViews";
+import { ModalTutorial } from "../../components/ui/ModalTutorial"
 
 const URLENVIRONMENT = '/assets/textures/envmap.hdr'
 
@@ -59,7 +60,6 @@ export const TutorialLevel = () => {
                             <Tire key={'tire2'}  x={-20} z={60} />
                             <Tire key={'tire4'}  x={-92} z={-60} rot={[Math.PI / 2,Math.PI / 2, 0]} axisXmov/>
                             <Tire key={'tire5'}  x={60} z={-55}/> */}
-                        {/* <FinishLine currentLevel={0} x={40} z={11.1}/> */}
                     </Suspense>
                 </Physics>
                 <Perf />
@@ -73,6 +73,7 @@ export const TutorialLevel = () => {
                     </div>}
             </div>
             <WelcomeText Level={0} />
+            <ModalTutorial />
         </>
     )
 }

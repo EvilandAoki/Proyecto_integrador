@@ -2,16 +2,18 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useState, useRef } from "react";
 import { Vector3 } from "three";
 import { useCarContext } from "../context/CarControlsContext"
+import { useAuth } from "../context";
 
 const bulletCoolDown = 300;
 const bulletSpeed = 30;
 
 const vel = 0.1;
 const speedLimit = 100;
-export const useControls = (vehicleApi, chassisApi , onFrame) => {
+export const useControls = (vehicleApi, chassisApi, onFrame) => {
 
   const { camera } = useThree();
   let [controls, setControls] = useState({});
+  const { openModalTutorial, showModalTutorial, cancelModalTutorial } = useAuth();
   //const [previousVelocity, setPreviousVelocity] = useState([0, 0, 0]);
 
   const [brakeForce, setBrakeForce] = useState(0);
@@ -46,31 +48,31 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
   useFrame((state) => {
     if (!vehicleApi || !chassisApi) return;
 
-    if(turboStartTime && ((Date.now() - turboStartTime) / 1000) > 1.5){ //Quitar el turbo despues de 2 segundos
+    if (turboStartTime && ((Date.now() - turboStartTime) / 1000) > 1.5) { //Quitar el turbo despues de 2 segundos
       setCarValue('turbo', false)
       setTurboStartTime(null)
     }
 
     let speedMulti = 1;
     if (controls.shift && car.turbo) {
-      
-      if(!turboStartTime){ //Tomar el momento que se uso el turbo
+
+      if (!turboStartTime) { //Tomar el momento que se uso el turbo
         setTurboStartTime(Date.now());
       }
-      state.camera.fov = 100 
+      state.camera.fov = 100
       let swaySpeed = 60
       let swayValue = (50 / 100 + 0.25) * 30
       state.camera.rotation.z += (Math.sin(state.clock.elapsedTime * swaySpeed * 0.9) / 1000) * swayValue
       state.camera.rotation.x += (Math.sin(state.clock.elapsedTime * swaySpeed) / 1000) * swayValue
-      speedMulti = 2 
+      speedMulti = 2
     } else {
-      state.camera.fov = 80 
-      speedMulti =  1
+      state.camera.fov = 80
+      speedMulti = 1
     }
     if (controls.w) {
-        setVelocity((v) => v < speedLimit * speedMulti  ? v + (vel * speedMulti) : speedLimit * speedMulti)
-        vehicleApi.applyEngineForce(150 * speedMulti, 2);
-        vehicleApi.applyEngineForce(150 * speedMulti, 3);
+      setVelocity((v) => v < speedLimit * speedMulti ? v + (vel * speedMulti) : speedLimit * speedMulti)
+      vehicleApi.applyEngineForce(150 * speedMulti, 2);
+      vehicleApi.applyEngineForce(150 * speedMulti, 3);
     } else if (controls.s) {
       setVelocity((v) => v > 0 ? v - vel : 0)
       vehicleApi.applyEngineForce(-150, 2);
@@ -103,7 +105,7 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
     if (controls.arrowright) chassisApi.applyLocalImpulse([0, -3, 0], [+0.5, 0, 0]);
 
     if (controls[" "]) {
-      setVelocity((v) => v >  0 ? v - (4 * vel): 0   );
+      setVelocity((v) => v > 0 ? v - (4 * vel) : 0);
       vehicleApi.setBrake(3, 2);
       vehicleApi.setBrake(3, 3);
     } else {
@@ -122,8 +124,12 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
       // console.log(chassisApi)
     }
 
-    if(controls.e){
+    if (controls.e) {
       shoot()
+    }
+
+    if (controls.t) {
+      showModalTutorial()
     }
 
     // Calcula la aceleración
@@ -141,11 +147,11 @@ export const useControls = (vehicleApi, chassisApi , onFrame) => {
       state.current.timeToShoot = now + bulletCoolDown;
       setBullets((bullets) => {
         return [...bullets,
-          {
-            id: now,
-            position: [bulletPosition.x, -0.8, bulletPosition.z],
-            forward: [bulletDirection.x, 0, bulletDirection.z]
-          }]
+        {
+          id: now,
+          position: [bulletPosition.x, -0.8, bulletPosition.z],
+          forward: [bulletDirection.x, 0, bulletDirection.z]
+        }]
       });
     }
   }

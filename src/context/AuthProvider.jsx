@@ -8,7 +8,7 @@ export const AuthContext = createContext();
 
 export const useAuth = () => {
     const context = useContext(AuthContext)
-    if(!context){
+    if (!context) {
         console.error('Error al usar el contexto');
         return;
     }
@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     const [userData, setUserData] = useState(null);
     const [gameInfo, setGameInfo] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [openModalTutorial, setopenModalTutorial] = useState(false);
 
     useEffect(() => {
         const suscribed = onAuthStateChanged(auth, (currentUser) => {
@@ -31,14 +32,14 @@ export const AuthProvider = ({ children }) => {
         return () => suscribed()
     }, [])
 
-    const saveGameInfo= (data) => {
+    const saveGameInfo = (data) => {
         //validaciones y otros
         setGameInfo(data);
         localStorage.setItem('gameInfo', JSON.stringify(data))
     }
 
     const saveUserData = (data) => {
-        if(data){
+        if (data) {
             setUserData(data);
             localStorage.setItem('userData', JSON.stringify(data))
         }
@@ -46,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
     const levelComplete = async (levelData) => {
         console.log(userData, "que hay en el userData?")
-        const res = await updateGameData( userData.email,{
+        const res = await updateGameData(userData.email, {
             ...levelData
         })
         saveGameInfo(res.userData)
@@ -71,24 +72,32 @@ export const AuthProvider = ({ children }) => {
             setLoading(false);
             saveUserData(res.user);
             saveGameInfo(dbData.userData);
-            return { success:  true, user: res.user }
+            return { success: true, user: res.user }
         } catch (error) {
             setLoading(false);
-            return { success: false,  error}
+            return { success: false, error }
         }
     }
-    
+
     const logout = async () => {
         try {
             await signOut(auth);
             localStorage.clear()
             setGameInfo(null)
             setUserData(null)
-            return { success:  true }
+            return { success: true }
         } catch (error) {
-            return { success: false,  error}
+            return { success: false, error }
         }
     }
+
+    const showModalTutorial = () => {
+        setopenModalTutorial(true);
+    };
+
+    const cancelModalTutorial = () => {
+        setopenModalTutorial(false);
+    };
 
     return (
         <AuthContext.Provider
@@ -100,7 +109,10 @@ export const AuthProvider = ({ children }) => {
                 saveGameInfo,
                 loading,
                 loadInfo,
-                levelComplete
+                levelComplete,
+                openModalTutorial,
+                showModalTutorial,
+                cancelModalTutorial
             }}
         >
             {children}

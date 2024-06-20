@@ -28,7 +28,8 @@ export const TutorialMap = (props) => {
         <>
             {/* Pista horizontal */}
             <Plane position={[0, -0.81, -30]} rotation={[-Math.PI / 2, 0, 0]} args={[100, 100]} color="grey" />
-            <TextFloat position={[-1.2, 0.2, -2]} text={"sigue el color"} color={"red"} />
+            <TextFloat position={[-1.2, 0, -2]} text={"Presiona"} color={"white"} />
+            <TextFloat position={[-1.2, -0.2, -2]} text={"la tecla T"} color={"white"} />
             <WallToEnd position={[2.3, -0.6, -29]} scale={[2.5, 3, 0.2]} />
             {/* Inicio de mapa recordemos X:horizontal y: vertical z: altura */}
             <ColliderBox position={[-3.4, -0.3, 2.3]} scale={[0.3, 1, 3]} color="blue" />

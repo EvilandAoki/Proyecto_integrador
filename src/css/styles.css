@@ -146,3 +146,29 @@ body {
   opacity: 0.9;
 }
 
+.container_scoreboard{
+  position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.container_scoreboard .scoreboard{
+  position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container_scoreboard .scoreboard p{
+  font-size: 30px;
+}
+
+
+.container_scoreboard img{
+  max-width: 200px;
+  position: relative;
+}

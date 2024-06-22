@@ -61,13 +61,15 @@ export const LevelThree = () => {
                         <TurboItem key={'turbo8'} x={-3} z={2} />
                     </Suspense>
                 </Physics>
-                <Perf />
+                {/* <Perf /> */}
             </Canvas>
             <span className="scoreBoard bg-white"><h2>{scoreBoard[0]} - {scoreBoard[1]}</h2></span>
-            {car.turbo &&
+            <div style={{ position: "absolute", top: 1, rigth: 2 }} className="boder pt-4 ps-4">
+                {car.turbo &&
                     <div className="border border-info rounded shadow-lg p-2">
                         <SiTurbo size={50} className="text-info" />
                     </div>}
+            </div>
         </>
     )
 }

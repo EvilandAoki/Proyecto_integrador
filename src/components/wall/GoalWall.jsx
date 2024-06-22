@@ -61,7 +61,7 @@ export const GoalWall = ({ position, side }) => {
         <group position={position} ref={goalBody} name={'WALL'+ side} >
             <mesh  >
                 <boxGeometry args={scale} />
-                <meshBasicMaterial color={color} opacity={1} transparent={true} />
+                <meshBasicMaterial color={color} opacity={0} transparent={true} />
             </mesh>
         </group>
     );

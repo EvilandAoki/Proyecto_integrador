@@ -24,7 +24,7 @@ const Player2 = ({ pos, rot }) => {
         mesh.children[0].position.set(0, -0.5, -1.5);
     }, [result]);
 
-    const position = [-1.5, 0.5, 3];
+    const position = [10, 2, 3];
     const width = 0.15;
     const height = 0.07;
     const front = 0.15;
@@ -53,7 +53,7 @@ const Player2 = ({ pos, rot }) => {
     }, [])
 
     return (
-        <group ref={player2}>
+        <group ref={player2} position={[10, 3, 15]}>
             <primitive object={result} rotation-y={Math.PI} position={[0, -0.01, 0]} />
             <boxGeometry args={chassisBodyArgs} />
         </group>

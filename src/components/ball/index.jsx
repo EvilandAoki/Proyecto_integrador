@@ -7,7 +7,7 @@ const collideCoolDown = 1000;
 export const Ball = (props) => {
   const [isSharing, setIsSharing] = useState(true);
   const [sphereRef, ballApi] = useSphere(() => ({
-    mass: 1,
+    mass: 200,
     args: [0.3],
     type: 'dynamic',
     position: props.position, // Posición inicial

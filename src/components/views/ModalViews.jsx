@@ -49,7 +49,7 @@ const WelcomeView = (props) => {
                     <h2>¡Felicidades!</h2>
                     <h3>
                         {
-                            props?.Level == 0 ? `Completaste el tutorial` : `Completaste el nivel ${props.Level - 1}`
+                            props?.Level == 0 ? `Completaste el tutorial` : `Completaste el nivel ${props.Level}`
                         }
                     </h3>
                 </div>

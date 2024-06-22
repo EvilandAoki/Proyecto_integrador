@@ -64,7 +64,7 @@ export const LevelOne = () => {
                 {/* <Perf /> */}
             </Canvas>
             <Stopwatch />
-            <WelcomeText Level={2} />
+            <WelcomeText Level={1} />
             <div style={{position: "absolute", top: 1, rigth: 2}} className="boder pt-4 ps-4">
                 {car.turbo && 
                     <div className="border border-info rounded shadow-lg p-2"> 

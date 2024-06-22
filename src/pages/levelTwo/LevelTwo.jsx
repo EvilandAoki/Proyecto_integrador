@@ -69,7 +69,7 @@ export const LevelTwo = () => {
             </Canvas>
             <LivesDisplay lives={lives} />
             <Stopwatch />
-            <WelcomeText Level={3} />
+            <WelcomeText Level={2} />
             <div style={{ position: "absolute", top: 1, rigth: 2 }} className="boder pt-4 ps-4">
                 {car.turbo &&
                     <div className="border border-info rounded shadow-lg p-2">

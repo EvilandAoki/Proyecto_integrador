@@ -9,8 +9,6 @@ export const WallToEnd = ({ position, scale }) => {
     const { levelComplete } = useAuth();
     const location = useLocation();
 
-    console.log(location.pathname, "my location")
-
     const color = "red"
 
     useEffect(() => {

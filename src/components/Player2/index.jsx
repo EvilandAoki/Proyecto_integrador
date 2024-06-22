@@ -4,9 +4,27 @@ import { useBox } from "@react-three/cannon";
 import Bullet from "../Bullet";
 import { socket } from '../../socket/socket-manager';
 import * as THREE from 'three';
+import { useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 
 const Player2 = ({ pos, rot }) => {
-    const position = [-1.5, 0.5, 3];
+
+    const scale = 0.08
+
+    let result = useLoader(
+        GLTFLoader,
+        "/assets/models/cars/enemy.glb"
+    ).scene;
+
+    useEffect(() => {
+        if (!result) return;
+        let mesh = result;
+        mesh.scale.set(scale, scale, scale);
+
+        mesh.children[0].position.set(0, -0.5, -1.5);
+    }, [result]);
+
+    const position = [10, 2, 3];
     const width = 0.15;
     const height = 0.07;
     const front = 0.15;
@@ -28,17 +46,17 @@ const Player2 = ({ pos, rot }) => {
     }
 
     useEffect(() => {
-        socket.on("player-moving",syncPlayer)
+        socket.on("player-moving", syncPlayer)
         return () => {
             socket.off("player-moving", syncPlayer)
         }
-    },[])
+    }, [])
 
     return (
-        <mesh ref={player2}>
-            <meshStandardMaterial color="red" />
+        <group ref={player2} position={[10, 3, 15]}>
+            <primitive object={result} rotation-y={Math.PI} position={[0, -0.01, 0]} />
             <boxGeometry args={chassisBodyArgs} />
-        </mesh>
+        </group>
     )
 }
 

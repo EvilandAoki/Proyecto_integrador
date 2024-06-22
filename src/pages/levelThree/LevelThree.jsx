@@ -10,19 +10,19 @@ import { Physics } from "@react-three/cannon"
 import { CubeCar } from "../../components/cars/CubeCar"
 import Player2 from "../../components/Player2"
 import Ball from "../../components/ball/index"
-import { useAuth } from "../../context"
+import { useAuth, useCarContext } from "../../context"
 import { useEffect } from "react"
-import { socket } from "../../socket/socket-manager"
+import { SiTurbo } from "react-icons/si";
 import TurboItem from "../../components/TurboItem"
 
 const URLENVIRONMENT = '/assets/textures/envmap.hdr'
 const URLENVIRONMENT2 = '/assets/textures/dikhololo_night_1k.hdr'
 
 export const LevelThree = () => {
-    const [thirdPerson, setThirdPerson] = useState(false);
+    const [thirdPerson, setThirdPerson] = useState(true);
     const [cameraPosition, setCameraPosition] = useState([-20, 3.9, 6.21]);
     const { scoreBoard } = useAuth()
-
+    const { car } = useCarContext()
     return (
         <>
             <Canvas
@@ -64,6 +64,10 @@ export const LevelThree = () => {
                 <Perf />
             </Canvas>
             <span className="scoreBoard bg-white"><h2>{scoreBoard[0]} - {scoreBoard[1]}</h2></span>
+            {car.turbo &&
+                    <div className="border border-info rounded shadow-lg p-2">
+                        <SiTurbo size={50} className="text-info" />
+                    </div>}
         </>
     )
 }

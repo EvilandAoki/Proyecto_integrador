@@ -47,10 +47,12 @@ export const WorldThree = (props) => {
             <ColliderBox position={[2, -0.3, -16]} scale={[0.3, 1, 2]} color="blue" />
             <ColliderBox position={[-2, -0.3, -16]} scale={[0.3, 1, 2]} color="blue" />
             <ColliderBox position={[0, -0.3, -16.85]} scale={[3.7, 1, 0.3]} color="blue" />
+            <GoalWall side={1} position={[0, -0.3, -16]} />
             {/* Arco 2 */}
             <ColliderBox position={[2, -0.3, 16]} scale={[0.3, 1, 2]} color="blue" />
             <ColliderBox position={[-2, -0.3, 16]} scale={[0.3, 1, 2]} color="blue" />
             <ColliderBox position={[0, -0.3, 16.85]} scale={[3.7, 1, 0.3]} color="blue" />
+            <GoalWall side={2} position={[0, -0.3, 16]} />
             
         </>
     )

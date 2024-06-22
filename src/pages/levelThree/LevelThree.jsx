@@ -46,7 +46,7 @@ export const LevelThree = () => {
                         <WorldThree />
                         <CubeCar thirdPerson={thirdPerson} isSharing={true} />
                         <Player2 />
-                        <Ball position={[0,0,0]} />
+                        <Ball position={[0, 1, 0]} />
                     </Suspense>
                 </Physics>
                 <Perf />

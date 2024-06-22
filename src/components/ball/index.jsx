@@ -7,9 +7,10 @@ const collideCoolDown = 1000;
 export const Ball = (props) => {
   const [isSharing, setIsSharing] = useState(true);
   const [sphereRef, ballApi] = useSphere(() => ({
-    mass: 20,
+    mass: 1,
     args: [0.3],
     type: 'dynamic',
+    position: props.position, // Posición inicial
     onCollide: handleCollide,
     ...props
   }));
@@ -19,11 +20,10 @@ export const Ball = (props) => {
   })
 
   const handleCollide = useCallback((e) => {
-    const collidedWith = e.body.parent.name
+    const collidedWith = e.body.name
     const now = Date.now();
     console.log(e.body)
     if((collidedWith == 'WALL1' || collidedWith == 'WALL2') && now >= state.current.timeToCollibe){
-      console.log('punshhhhhhhh')
         state.current.timeToCollibe = now + collideCoolDown;
         const { position } = ballApi
         position.set(...props.position)
@@ -93,8 +93,8 @@ export const Ball = (props) => {
   return (
     <group name="BALL">
       <mesh ref={sphereRef} castShadow >
-        <sphereGeometry args={[0.3, 32, 32]} />
-        <meshLambertMaterial color="green" />
+        <sphereGeometry  args={[0.3, 32, 32]} />
+        <meshLambertMaterial color="orange" />
       </mesh>
     </group>
     

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef } from 'react'
 import { useLocation } from "react-router-dom";
 import { useAuth, useCarContext } from '../../context';
 
-const scale = [2.5, 3, 0.2]
+const scale = [3.7, 1, 0.3]
 const color = "red"
 const collideCoolDown = 1000;
 export const GoalWall = ({ position, side }) => {
@@ -44,7 +44,7 @@ export const GoalWall = ({ position, side }) => {
         <group position={position} ref={goalBody} name={'WALL'+ side} >
             <mesh  >
                 <boxGeometry args={scale} />
-                <meshBasicMaterial color={color} />
+                <meshBasicMaterial color={color} opacity={1} transparent={true} />
             </mesh>
         </group>
     );

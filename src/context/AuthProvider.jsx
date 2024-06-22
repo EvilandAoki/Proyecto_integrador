@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
     const [gameInfo, setGameInfo] = useState(null);
     const [loading, setLoading] = useState(true);
     const [openModalTutorial, setopenModalTutorial] = useState(false);
+      const [marker, setMarker] = useState([0,0])
 
     useEffect(() => {
         const suscribed = onAuthStateChanged(auth, (currentUser) => {
@@ -112,7 +113,8 @@ export const AuthProvider = ({ children }) => {
                 levelComplete,
                 openModalTutorial,
                 showModalTutorial,
-                cancelModalTutorial
+                cancelModalTutorial,
+                marker, setMarker
             }}
         >
             {children}

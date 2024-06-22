@@ -10,13 +10,16 @@ import { Physics } from "@react-three/cannon"
 import { CubeCar } from "../../components/cars/CubeCar"
 import Player2 from "../../components/Player2"
 import Scoreboard from "../../components/controls/ScoreBoard"
+import Ball from "../../components/ball/index"
+import { useAuth } from "../../context"
 
 const URLENVIRONMENT = '/assets/textures/envmap.hdr'
 const URLENVIRONMENT2 = '/assets/textures/dikhololo_night_1k.hdr'
 
 export const LevelThree = () => {
-    const [thirdPerson, setThirdPerson] = useState(false);
+    const [thirdPerson, setThirdPerson] = useState(true);
     const [cameraPosition, setCameraPosition] = useState([-20, 3.9, 6.21]);
+    const { marker } = useAuth()
 
     return (
         <>
@@ -44,11 +47,13 @@ export const LevelThree = () => {
                         <WorldThree />
                         <CubeCar thirdPerson={thirdPerson} isSharing={true} />
                         <Player2 />
+                        <Ball position={[0, 1, 0]} />
                     </Suspense>
                 </Physics>
                 <Perf />
             </Canvas>
             <Scoreboard />
+            <span className="marker bg-white"><h2>{marker[0]} - {marker[1]}</h2></span>
         </>
     )
 }

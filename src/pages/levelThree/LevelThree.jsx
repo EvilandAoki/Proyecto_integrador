@@ -9,6 +9,7 @@ import CarControls, { CarKeyboardControls } from "../../components/controls/CarC
 import { Physics } from "@react-three/cannon"
 import { CubeCar } from "../../components/cars/CubeCar"
 import Player2 from "../../components/Player2"
+import Scoreboard from "../../components/controls/ScoreBoard"
 import Ball from "../../components/ball/index"
 import { useAuth, useCarContext } from "../../context"
 import { useEffect } from "react"
@@ -63,7 +64,7 @@ export const LevelThree = () => {
                 </Physics>
                 {/* <Perf /> */}
             </Canvas>
-            <span className="scoreBoard bg-white"><h2>{scoreBoard[0]} - {scoreBoard[1]}</h2></span>
+            <Scoreboard scoreOne={scoreBoard[0]} scoreTwo={scoreBoard[1]}/>            
             <div style={{ position: "absolute", top: 1, rigth: 2 }} className="boder pt-4 ps-4">
                 {car.turbo &&
                     <div className="border border-info rounded shadow-lg p-2">

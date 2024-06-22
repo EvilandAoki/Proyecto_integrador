@@ -146,3 +146,8 @@ body {
   opacity: 0.9;
 }
 
+.marker{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}

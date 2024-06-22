@@ -2,8 +2,9 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 import { RigidBody } from '@react-three/rapier'
 import { usePlane } from '@react-three/cannon';
+import { GoalWall } from '../../../components/wall/GoalWall'
 import { ColliderBox } from '../../../components/colliders/ColliderBox';
-import { Ball } from '../../../components/ball/Ball';
+//import { Ball } from '../../../components/ball/Ball';
 
 const Plane = ({ position, rotation, args, color }) => {
     const [ref] = usePlane(() => ({
@@ -26,7 +27,7 @@ export const WorldThree = (props) => {
         <>
             <Plane position={[0, -0.81, -0]} rotation={[-Math.PI / 2, 0, 0]} args={[22, 35]} color="green" />
             {/* Componente de esfera */}
-            <Ball />
+            {/* <Ball /> */}
             {/* Cancha */}
             <ColliderBox position={[-10, -0.3, 0]} scale={[0.3, 1, 30]} color="black" />
             <ColliderBox position={[10, -0.3, 0]} scale={[0.3, 1, 30]} color="black" />
@@ -46,12 +47,16 @@ export const WorldThree = (props) => {
             <ColliderBox position={[2, -0.3, -16]} scale={[0.3, 1, 2]} color="blue" />
             <ColliderBox position={[-2, -0.3, -16]} scale={[0.3, 1, 2]} color="blue" />
             <ColliderBox position={[0, -0.3, -16.85]} scale={[3.7, 1, 0.3]} color="blue" />
+            <GoalWall side={1} position={[0, -0.3, -16]} />
             {/* Arco 2 */}
             <ColliderBox position={[2, -0.3, 16]} scale={[0.3, 1, 2]} color="blue" />
             <ColliderBox position={[-2, -0.3, 16]} scale={[0.3, 1, 2]} color="blue" />
             <ColliderBox position={[0, -0.3, 16.85]} scale={[3.7, 1, 0.3]} color="blue" />
+            <GoalWall side={2} position={[0, -0.3, 16]} />
+            
         </>
     )
 }
 
-
+/* <GoalWall side={1} position={[4,0.001,2]} />
+            <GoalWall side={2} position={[4,0.001,-2]} /> */

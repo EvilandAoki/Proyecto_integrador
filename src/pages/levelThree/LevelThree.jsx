@@ -9,7 +9,7 @@ import CarControls, { CarKeyboardControls } from "../../components/controls/CarC
 import { Physics } from "@react-three/cannon"
 import { CubeCar } from "../../components/cars/CubeCar"
 import Player2 from "../../components/Player2"
-import Ball from "../../components/Ball"
+import Ball from "../../components/Ball/index"
 import { useAuth } from "../../context"
 
 const URLENVIRONMENT = '/assets/textures/envmap.hdr'

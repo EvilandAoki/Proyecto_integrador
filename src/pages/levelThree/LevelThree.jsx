@@ -64,9 +64,7 @@ export const LevelThree = () => {
                 </Physics>
                 {/* <Perf /> */}
             </Canvas>
-            <Scoreboard />
-            <span className="marker bg-white"><h2>{marker[0]} - {marker[1]}</h2></span>
-            <span className="scoreBoard bg-white"><h2>{scoreBoard[0]} - {scoreBoard[1]}</h2></span>
+            <Scoreboard scoreOne={scoreBoard[0]} scoreTwo={scoreBoard[1]}/>            
             <div style={{ position: "absolute", top: 1, rigth: 2 }} className="boder pt-4 ps-4">
                 {car.turbo &&
                     <div className="border border-info rounded shadow-lg p-2">
